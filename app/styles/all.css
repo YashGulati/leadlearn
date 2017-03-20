@@ -32,6 +32,7 @@ header ul {
   list-style: none;
 }
 header ul li {
+  cursor: pointer;
   vertical-align: middle;
   display: inline;
   margin-left: 40px;
