@@ -12,6 +12,7 @@ button:focus {
 body {
   font-family: 'Open Sans', sans-serif;
   color: #fff;
+  margin: 0;
 }
 header {
   position: relative;
@@ -30,6 +31,10 @@ header ul {
   display: inline;
   margin: 0 10px;
   list-style: none;
+}
+header ul a {
+  text-decoration: none;
+  color: #fff;
 }
 header ul li {
   cursor: pointer;

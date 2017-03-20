@@ -1,7 +1,8 @@
 var express = require('express')
 var app = express()
 var stylus = require('express-stylus')
-
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.set('view engine', 'ejs')
 
@@ -17,6 +18,11 @@ app.use(stylus({
   force: true
 }))
 app.use(express.static('./app'))
+
+app.get('/*', (req, res)=>{
+  page = req.url.substring(1)
+  res.render(page)
+})
 
 app.listen(80, ()=>{
   console.log("Listening on port 80...")
