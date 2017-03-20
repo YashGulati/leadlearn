@@ -1,0 +1,62 @@
+button {
+  cursor: pointer;
+  color: #fff;
+}
+.green {
+  background: #008000;
+  font-weight: bold;
+}
+button:focus {
+  outline: none;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+}
+header {
+  position: relative;
+  font-weight: bolder;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(255,255,255,0));
+  padding: 30px;
+  padding-bottom: 40px;
+}
+header img {
+  height: 2.5em;
+  float: left;
+  display: inline;
+}
+header ul {
+  font-weight: bolder;
+  display: inline;
+  margin: 0 10px;
+  list-style: none;
+}
+header ul li {
+  vertical-align: middle;
+  display: inline;
+  margin-left: 40px;
+}
+header .buttons {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translate(0%, -50%);
+}
+header .buttons button {
+  border: none;
+  padding: 10px;
+}
+header .buttons button:nth-child(1) {
+  background: rgba(0,0,0,0);
+}
+header .buttons button:nth-child(2) {
+  background: #008000;
+}
+#needHelp {
+  border: 1px solid #fff;
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  font-size: 1em;
+  padding: 10px;
+}

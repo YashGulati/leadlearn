@@ -1,0 +1,52 @@
+.dashboard {
+  height: 100vh;
+  background-image: url("../1-zVDcaM6mqhi9m0LP_Sq4Ag.jpeg");
+  background-size: cover;
+  overflow: hidden;
+}
+.dashboard .text {
+  font-size: 1.2em;
+  position: absolute;
+  left: 5%;
+  top: 45%;
+  transform: translate(0%, -50%);
+}
+.dashboard .text h1 {
+  font-size: 2.8em;
+}
+.dashboard>.right {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  float: right;
+}
+.dashboard>.right>.buttons {
+  font-size: 1.2em;
+  position: absolute;
+  left: 32%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+}
+.dashboard>.right>.buttons>a {
+  color: #fff;
+  text-decoration: none;
+}
+.dashboard>.right>.buttons>a div {
+  padding: 20px 60px;
+  text-align: center;
+  height: 2em;
+  margin: 40px;
+  line-height: 200%;
+}
+.dashboard>.right>.buttons>a #joinBtn {
+  background: #008000;
+}
+.dashboard>.right>.buttons>a #joinBtn:hover {
+  background: #006400;
+}
+.dashboard>.right>.buttons>a #loginBtn {
+  border: 2px solid #008000;
+}
+.dashboard>.right>.buttons>a #loginBtn:hover {
+  background: #008000;
+}

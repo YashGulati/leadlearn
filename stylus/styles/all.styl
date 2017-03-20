@@ -1,0 +1,54 @@
+button
+  cursor: pointer
+  color: white
+.green
+  background: green
+  font-weight: bold
+button:focus
+  outline: none
+body
+  // background: red
+  font-family: 'Open Sans',sans-serif
+  color: white
+header
+  position: relative
+  font-weight: bolder
+  background: linear-gradient( rgba(0,0,0,0.6), rgba(255,255,255,0) );
+  padding: 30px
+  padding-bottom: 40px
+  img
+    height: 2.5em
+    float: left
+    display: inline;
+    // background: red
+  ul
+    font-weight: bolder
+    display: inline;
+    margin: 0 10px;
+    list-style: none
+    // background: red
+    // float: left
+    li
+      vertical-align: middle;
+      display: inline;
+      margin-left: 40px;
+  .buttons
+    position: absolute;
+    top: 50%
+    right: 0px
+    transform: translate(0%,-50%);
+    button
+      border: none
+      padding: 10px
+    button:nth-child(1)
+      background: rgba(0,0,0,0)
+    button:nth-child(2)
+      background: green
+
+#needHelp
+  border: 1px solid white
+  position: fixed;
+  right: 25px
+  bottom: 25px
+  font-size: 1em
+  padding: 10px
