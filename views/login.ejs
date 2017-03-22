@@ -13,7 +13,7 @@
     <form class="container" action="/login" method="post">
       <% if(err!=0){ %>
         <div class="err">
-          <% err %>
+          <%= err %>
         </div>
       <% } %>
       <p><label>username</label></label><input type="text" name="username" value=""></p>

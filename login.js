@@ -1,5 +1,4 @@
 var user = require('./dbs/userSchema')
-var cookies = require('./cookies')
 var global = require('./global')
 
 var login = function(req, res){
@@ -11,10 +10,10 @@ var login = function(req, res){
           if(user.password === req.body.password ){
             loggedIn(req, res);
           }
-          else console.log("-> Password Not Matched");
+          else{ console.log("-> Password Not Matched"); res.render('login', {loggedIn: 0, err: 'Password Not Matched'}); return; }
         })
       }
-      else if(count==0) console.log('-> username not found');
+      else if(count==0){ console.log('-> username not found'); res.render('login', {loggedIn: 0, err: 'username not found'}); return; }
     });
   }
 }
@@ -22,10 +21,9 @@ var login = function(req, res){
 function loggedIn(req, res) {
   console.log('-> Password matched');
   console.log("-> %s logged in Successfully.", req.body.username);
-  global.loggedUsers.push({username: req.body.username, sessionID: cookies.setCookie(res)})
+  userID = Math.floor(Math.random() * 90000);
+  global.loggedUsers.push({username: req.body.username, sessionID: res.cookie('session', userID, {signed: true})})
   console.log(global.loggedUsers)
-  res.render('login', {loggedIn: 1 ,err: 'dsfds'})
+  res.render('login', {loggedIn: 1 ,err: 0})
 }
-module.exports = {
-  login: login
-}
+module.exports = { login }
