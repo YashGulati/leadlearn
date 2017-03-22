@@ -9,8 +9,10 @@
     <li>BLOG</li>
     <li>TEAMS</li>
   </ul>
-  <div class="buttons">
-    <a name="button" class="button" href="/login">Log in</a>
-    <a name="button" class="green" href="/register">REGISTER</a>
-  </div>
+  <% if(loggedIn === 0){ %>
+    <div class="buttons">
+      <a name="button" class="button" href="/login">Log in</a>
+      <a name="button" class="green" href="/register">REGISTER</a>
+    </div>
+  <% } %>
 </header>

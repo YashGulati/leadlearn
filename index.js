@@ -10,12 +10,20 @@ var mongoDB = 'mongodb://127.0.0.1:27017/leadlearn';
 mongoose.connect(mongoDB);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+var user = require('./dbs/userSchema')
 //----------------------
+
+// cookies--------------
+var cookieParser = require('cookie-parser')
+app.use(cookieParser('maybehere'))
+var cookies = require('./cookies')
+//----------------------
+
 app.set('view engine', 'ejs')
 
 
 app.get('/', (req, res)=>{
-  res.render('index')
+  res.render('index', { loggedIn: 0 })
 })
 
 app.use(stylus({
@@ -37,8 +45,7 @@ app.post('/register', (req,res)=>{
 })
 
 app.post('/login', (req,res)=>{
-  console.log(req.body);
-  res.redirect('/login');
+  require('./loginCheck')(req, res);
 })
 
 app.listen(80, ()=>{
