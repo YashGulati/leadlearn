@@ -9,10 +9,13 @@
     <li>BLOG</li>
     <li>TEAMS</li>
   </ul>
-  <% if(loggedIn === 0){ %>
     <div class="buttons">
-      <a name="button" class="button" href="/login">Log in</a>
-      <a name="button" class="green" href="/register">REGISTER</a>
-    </div>
-  <% } %>
+      <% if(loggedIn === 0){ %>
+        <a name="button" class="button" href="/login">Log in</a>
+        <a name="button" class="green" href="/register">REGISTER</a>
+      <% } else { %>
+        <a name="button" class="button" href="/profile">Profile</a>
+        <a name="button" class="button" href="/logout">Log out</a>
+      <% } %>
+</div>
 </header>

@@ -23,6 +23,7 @@ app.set('view engine', 'ejs')
 
 
 app.get('/', (req, res)=>{
+  console.log('Signed Cookies: ', req.signedCookies)
   res.render('index', { loggedIn: 0 })
 })
 
@@ -36,7 +37,7 @@ app.use(express.static('./app'))
 
 app.get('/*', (req, res)=>{
   page = req.url.substring(1)
-  res.render(page)
+  res.render(page, {loggedIn: 0, err: 0})
 })
 
 app.post('/register', (req,res)=>{
@@ -45,7 +46,7 @@ app.post('/register', (req,res)=>{
 })
 
 app.post('/login', (req,res)=>{
-  require('./loginCheck')(req, res);
+  require('./login').login(req, res);
 })
 
 app.listen(80, ()=>{
