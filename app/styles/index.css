@@ -1,7 +1,9 @@
-.dashboard {
-  height: 100vh;
+body {
   background-image: url("../1-zVDcaM6mqhi9m0LP_Sq4Ag.jpeg");
   background-size: cover;
+}
+.dashboard {
+  height: 100vh;
   overflow: hidden;
 }
 .dashboard .text {
@@ -31,6 +33,7 @@
   color: #fff;
   text-decoration: none;
 }
+.dashboard>.right>.buttons>a a,
 .dashboard>.right>.buttons>a div {
   padding: 20px 60px;
   text-align: center;

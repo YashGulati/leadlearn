@@ -1,0 +1,12 @@
+body {
+  background-image: url("../1-zVDcaM6mqhi9m0LP_Sq4Ag.jpeg");
+  background-size: cover;
+}
+.container {
+  background: #808080;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+}
