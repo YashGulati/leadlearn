@@ -31,8 +31,7 @@ app.get('/*', (req, res)=>{
   res.render(page)
 })
 
-app.post('/addUser', (req,res)=>{
-  // console.log(req.body);
+app.post('/register', (req,res)=>{
   console.log(require('./dbs/addUser')(req.body));
   res.redirect('/registrationSuccess');
 })
