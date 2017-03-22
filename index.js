@@ -37,6 +37,11 @@ app.post('/addUser', (req,res)=>{
   res.redirect('/registrationSuccess');
 })
 
+app.post('/login', (req,res)=>{
+  console.log(req.body);
+  res.redirect('/login');
+})
+
 app.listen(80, ()=>{
   console.log("Listening on port 80...")
 })
