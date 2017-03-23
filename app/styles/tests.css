@@ -103,10 +103,17 @@ h1 {
   width: 100%;
   background: rgba(90,80,90,0.5);
 }
-.container button {
+.container a {
+  color: #fff;
+  text-decoration: none;
+  margin: 10px;
   background: rgba(50,50,50,0.5);
   border: none;
 }
-.container button:hover {
+.container a:hover {
   background: rgba(50,50,50,0.8);
+}
+test {
+  text-align: center;
+  background: #f00;
 }
