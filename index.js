@@ -3,7 +3,7 @@ var app = express()
 var stylus = require('express-stylus')
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
-
+var global = require('./global')
 // database-------------
 var mongoose = require('mongoose')
 var mongoDB = 'mongodb://127.0.0.1:27017/leadlearn';
@@ -38,6 +38,11 @@ app.use(express.static('./app'))
 app.get('/logout', (req,res)=>{
   res.clearCookie('session', {path:'/'})
   res.render('login', {loggedIn: 0, err: 0})
+})
+
+app.get('/dev', (req,res)=>{
+  console.log(global);
+  res.render('dev', { global: JSON.stringify(global) })
 })
 
 app.get('/*', (req, res)=>{ var loggedIn = 0

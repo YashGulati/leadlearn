@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <% include metaTags %>
+    <title>LeadLearn | Login</title>
     <link rel="stylesheet" href="/styles/all.css">
     <link rel="stylesheet" href="/styles/register.css">
     <link rel="shortcut icon" href="/img/favicon.ico" />
@@ -11,14 +10,19 @@
   <body>
     <% include header %>
     <form class="container" action="/login" method="post">
-      <% if(err!=0){ %>
-        <div class="err">
-          <%= err %>
-        </div>
+      <% if(loggedIn===1){ %>
+        <h2>Woaah! You are logged In.</h2>
+        <center><h4><a href="/">Home</a> | <a href="/profile">Profile</a> | <a href="/logout">Log Out</a></h4></center>
+      <% } else { %>
+        <% if(err!=0){ %>
+          <div class="err">
+            <%= err %>
+          </div>
+        <% } %>
+        <p><label>username</label></label><input type="text" name="username" value=""></p>
+        <p><label>password</label><input type="password" name="password" value=""></p>
+        <input type="submit" name="" value="Submit">
       <% } %>
-      <p><label>username</label></label><input type="text" name="username" value=""></p>
-      <p><label>password</label><input type="password" name="password" value=""></p>
-      <input type="submit" name="" value="Submit">
     </form>
   </body>
 </html>

@@ -22,7 +22,8 @@ function loggedIn(req, res) {
   console.log('-> Password matched');
   console.log("-> %s logged in Successfully.", req.body.username);
   userID = Math.floor(Math.random() * 90000);
-  global.loggedUsers.push({username: req.body.username, sessionID: res.cookie('session', userID, {signed: true})})
+  res.cookie('session', userID, {signed: true})
+  global.loggedUsers.push({username: req.body.username, sessionID: userID})
   console.log(global.loggedUsers)
   res.render('login', {loggedIn: 1 ,err: 0})
 }
