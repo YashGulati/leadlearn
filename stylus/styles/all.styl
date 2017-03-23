@@ -1,17 +1,18 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
 @require 'header'
-button
+button, select
   cursor: pointer
   color: white
+  border: none
 .green
   background: green
   font-weight: bold
-button:focus
+button:focus, select:focus
   outline: none
 html, body
   height: 100%
 body
-  // background: red
+  background: #292929
   font-family: 'Open Sans',sans-serif
   color: white
   margin: 0
@@ -22,3 +23,7 @@ body
   bottom: 25px
   font-size: 1em
   padding: 10px
+center(a,b,c,d)
+  left: a
+  top: b
+  transform: translate(c,d)

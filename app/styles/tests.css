@@ -81,3 +81,32 @@ body {
   font-size: 1em;
   padding: 10px;
 }
+h1 {
+  font-family: 'Monofett', cursive;
+  font-size: 5em;
+  margin: 0px;
+  margin-bottom: 30px;
+}
+.container {
+  background: rgba(100,255,100,0.5);
+  padding: 50px;
+  text-align: center;
+  display: run-in;
+  margin: 0 auto;
+  width: 25%;
+}
+.container * {
+  margin-top: 10px;
+  padding: 10px;
+}
+.container select {
+  width: 100%;
+  background: rgba(90,80,90,0.5);
+}
+.container button {
+  background: rgba(50,50,50,0.5);
+  border: none;
+}
+.container button:hover {
+  background: rgba(50,50,50,0.8);
+}
