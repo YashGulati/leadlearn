@@ -16,7 +16,7 @@ class App extends React.Component {
     return (
       <div>
         { this.state.screen==='1'?<Screen1 onSubmit={this.screenChange} />:"" }
-        { this.state.screen==='test'?<Test weapon={this.state.weapon} />:"" }
+        { this.state.screen==='test'?<Test onSubmit={this.screenChange} weapon={this.state.weapon} />:"" }
       </div>
     )
   }

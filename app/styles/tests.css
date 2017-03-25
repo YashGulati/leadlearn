@@ -134,3 +134,7 @@ h1 {
 #questionContainer .options .option.selected {
   background: rgba(20,255,100,0.6);
 }
+#questionContainer button {
+  padding: 10px 15px;
+  background: #008000;
+}

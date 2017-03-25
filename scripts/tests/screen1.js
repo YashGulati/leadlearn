@@ -19,6 +19,7 @@ class Screen1 extends React.Component {
     return (
       <div>
       <center><h1>Ready, Get Set Go!</h1></center>
+      {/* <p>Prepare yourself by solving our tests.</p> */}
       <form className="container" onSubmit={this.changeScreen} >
         <select name="course" onChange={this.weaponChange}>
           <option disabled selected defaultValue value> -- Select your weapon -- </option>

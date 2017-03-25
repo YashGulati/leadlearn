@@ -6,9 +6,14 @@ class Test extends React.Component {
     super(props)
     this.state = {query: 'Fetching question...'}
     this.fetchQuestion = this.fetchQuestion.bind(this)
+    this.changeScreen = this.changeScreen.bind(this)
   }
   componentWillMount() {
     this.fetchQuestion()
+  }
+  changeScreen(e){
+    e.preventDefault()
+    this.props.onSubmit('1', '' )
   }
   fetchQuestion() { let that = this;
     let url_ = "/getQuestion?weapon="+this.props.weapon
@@ -24,10 +29,12 @@ class Test extends React.Component {
   render() {
     return (
       <div>
-        <h2>Test on {this.props.weapon} </h2>
+        <center><h2>Test on {this.props.weapon} </h2></center>
+        <div><button onClick={this.changeScreen}>Change Weapon</button></div>
         <div id='questionContainer'>
           <p className="query">Question: {this.state.query}</p>
           <Options options={this.state.options} />
+          <button type="button" className="button">Next</button>
         </div>
       </div>
     )

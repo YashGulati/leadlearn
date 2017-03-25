@@ -9573,6 +9573,7 @@ var Test = function (_React$Component) {
 
     _this.state = { query: 'Fetching question...' };
     _this.fetchQuestion = _this.fetchQuestion.bind(_this);
+    _this.changeScreen = _this.changeScreen.bind(_this);
     return _this;
   }
 
@@ -9580,6 +9581,12 @@ var Test = function (_React$Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       this.fetchQuestion();
+    }
+  }, {
+    key: 'changeScreen',
+    value: function changeScreen(e) {
+      e.preventDefault();
+      this.props.onSubmit('1', '');
     }
   }, {
     key: 'fetchQuestion',
@@ -9602,11 +9609,24 @@ var Test = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(
-          'h2',
+          'center',
           null,
-          'Test on ',
-          this.props.weapon,
-          ' '
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Test on ',
+            this.props.weapon,
+            ' '
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'button',
+            { onClick: this.changeScreen },
+            'Change Weapon'
+          )
         ),
         _react2.default.createElement(
           'div',
@@ -9617,7 +9637,12 @@ var Test = function (_React$Component) {
             'Question: ',
             this.state.query
           ),
-          _react2.default.createElement(_Options2.default, { options: this.state.options })
+          _react2.default.createElement(_Options2.default, { options: this.state.options }),
+          _react2.default.createElement(
+            'button',
+            { type: 'button', className: 'button' },
+            'Next'
+          )
         )
       );
     }
@@ -9816,7 +9841,7 @@ var App = function (_React$Component) {
         'div',
         null,
         this.state.screen === '1' ? _react2.default.createElement(_screen2.default, { onSubmit: this.screenChange }) : "",
-        this.state.screen === 'test' ? _react2.default.createElement(_Test2.default, { weapon: this.state.weapon }) : ""
+        this.state.screen === 'test' ? _react2.default.createElement(_Test2.default, { onSubmit: this.screenChange, weapon: this.state.weapon }) : ""
       );
     }
   }]);
