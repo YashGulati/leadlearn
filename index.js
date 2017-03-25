@@ -35,6 +35,10 @@ app.use(stylus({
 }))
 app.use(express.static('./app'))
 
+app.get('/getQuestion', (req,res)=>{
+  require('./question').renderQuestion(req, res);
+})
+
 app.get('/logout', (req,res)=>{
   res.clearCookie('session', {path:'/'})
   res.render('login', {loggedIn: 0, err: 0})
@@ -54,6 +58,18 @@ app.get('/*', (req, res)=>{ var loggedIn = 0
 app.post('/register', (req,res)=>{
   console.log(require('./dbs/addUser')(req.body));
   res.redirect('/registrationSuccess');
+})
+
+app.post('/addQuestion', (req,res)=>{
+  question = {
+    query: req.body.query,
+    options: req.body.options.split('||'),
+    correctOp: req.body.correctOp,
+    tags: req.body.tags.split(' ')
+  }
+  console.log(question);
+  console.log(require('./dbs/addQuestion')(question));
+  res.redirect('/addQuestion');
 })
 
 app.post('/login', (req,res)=>{

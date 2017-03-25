@@ -1,13 +1,35 @@
 import React from 'react'
+import Options from './Options'
 
-class Screen1 extends React.Component {
+class Test extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {query: 'Fetching question...'}
+    this.fetchQuestion = this.fetchQuestion.bind(this)
+  }
+  componentWillMount() {
+    this.fetchQuestion()
+  }
+  fetchQuestion() { let that = this;
+    let url_ = "/getQuestion?weapon="+this.props.weapon
+    $.get(url_, function(data, status){
+      that.setState({
+        query: data.query,
+        options: data.options[0].split(','),
+      })
+    });
+  }
   render() {
     return (
       <div>
-        <h3>Question for {this.props.weapon} </h3>
+        <h2>Test on {this.props.weapon} </h2>
+        <div id='questionContainer'>
+          <p className="query">Question: {this.state.query}</p>
+          <Options options={this.state.options} />
+        </div>
       </div>
     )
   }
 }
 
-module.exports = Screen1
+module.exports = Test

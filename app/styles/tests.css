@@ -113,7 +113,24 @@ h1 {
 .container button:hover {
   background: rgba(50,50,50,0.8);
 }
-test {
-  text-align: center;
-  background: #f00;
+#questionContainer {
+  border: 2px solid #808080;
+  width: 50%;
+  margin: 0 auto;
+}
+#questionContainer .query {
+  font-size: 1.2em;
+  padding: 5px;
+  padding-left: 30px;
+}
+#questionContainer .options .option {
+  border: 1px solid #a9a9a9;
+  padding: 10px;
+  padding-left: 50px;
+}
+#questionContainer .options .option:hover {
+  background: rgba(20,100,255,0.8);
+}
+#questionContainer .options .option.selected {
+  background: rgba(20,255,100,0.6);
 }

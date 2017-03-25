@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include metaTags %>
+    <title>leadLearn | addQuestion</title>
+    <link rel="stylesheet" href="/styles/all.css">
+    <link rel="stylesheet" href="/styles/register.css">
+  </head>
+  <body>
+    <% include header %>
+    <form class="container" action="/addQuestion" method="post">
+      <h1>ADD QUESTION</h1>
+      <p><label>query</label><textarea type="text" name="query" value=""></textarea></p>
+      <p><label>options</label><textarea type="text" name="options"></textarea></p>
+      <p><label>correctOp</label><textarea type="text" name="correctOp"></textarea></p>
+      <p><label>Tags</label><textarea type="text" name="tags"></textarea></p>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
