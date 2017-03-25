@@ -36,7 +36,7 @@ app.use(stylus({
 app.use(express.static('./app'))
 
 app.get('/getQuestion', (req,res)=>{
-  require('./question').renderQuestion(req, res);
+  require('./dbs/getQuestion').renderQuestion(req, res);
 })
 
 app.get('/logout', (req,res)=>{

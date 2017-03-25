@@ -1,5 +1,5 @@
-var question = require('./dbs/questionSchema')
-var global = require('./global')
+var question = require('./questionSchema')
+// var global = require('./global')
 
 var renderQuestion = function(req, res){
   // const weapon = req.param('weapon')
