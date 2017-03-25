@@ -15,8 +15,10 @@ class Test extends React.Component {
     $.get(url_, function(data, status){
       that.setState({
         query: data.query,
-        options: data.options[0].split(','),
+        options: data.options,
       })
+      console.log('-> Fetched question: ');
+      console.log(that.state.options);
     });
   }
   render() {

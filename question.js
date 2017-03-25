@@ -5,6 +5,8 @@ var renderQuestion = function(req, res){
   // const weapon = req.param('weapon')
   question.findOne({  }, function(err, question){
     res.send(question)
+    console.log('-> Question Sent: ');
+    console.log(question);
   })
 }
 
