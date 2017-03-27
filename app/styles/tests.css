@@ -36,18 +36,23 @@ header .buttons {
   right: 0px;
   transform: translate(0%, -50%);
 }
-header .buttons a,
+header .buttons .profile {
+  display: none;
+  position: absolute;
+  height: 150px;
+  width: 100px;
+  background: rbga(20, 40, 100, 0.8);
+  z-index: 1;
+}
 header .buttons .button {
   border: none;
   padding: 10px;
-}
-header .buttons .button:nth-child(1) {
   background: rgba(0,0,0,0);
-}
-header .buttons a {
-  background: #008000;
   text-decoration: none;
   color: #fff;
+}
+header .buttons .button:nth-child(2) {
+  background: #008000;
 }
 button,
 select {
@@ -81,6 +86,11 @@ body {
   font-size: 1em;
   padding: 10px;
 }
+body {
+  background: #948e99; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #948e99, #2e1437); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #948e99, #2e1437); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 h1 {
   font-family: 'Monofett', cursive;
   font-size: 5em;
@@ -88,7 +98,11 @@ h1 {
   margin-bottom: 30px;
 }
 .container {
-  background: rgba(100,255,100,0.5);
+  position: relative;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+  background: rgba(200,200,200,0.5);
   padding: 50px;
   text-align: center;
   display: run-in;

@@ -1,6 +1,6 @@
 var user = require('./dbs/userSchema')
 var global = require('./global')
-
+var user = require('./dbs/userSchema')
 var login = function(req, res){
   if(req.body.username!="" || req.body.username!=0 ){
     user.count({'username': req.body.username}, function (err, count){
@@ -22,8 +22,15 @@ function loggedIn(req, res) {
   console.log('-> Password matched');
   console.log("-> %s logged in Successfully.", req.body.username);
   userID = Math.floor(Math.random() * 90000);
-  res.cookie('session', userID, {signed: true})
+
   global.loggedUsers.push({username: req.body.username, sessionID: userID})
+  user.update({username: req.body.username}, {
+    cookie: userID,
+  }, function(err, affected, resp) {
+     console.log(resp);
+  })
+
+  res.cookie('session', userID, {signed: true})
   console.log(global.loggedUsers)
   res.render('login', {loggedIn: 1 ,err: 0})
 }

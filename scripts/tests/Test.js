@@ -1,5 +1,6 @@
 import React from 'react'
 import Options from './Options'
+import Details from './Details'
 
 class Test extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class Test extends React.Component {
       <div>
         <center><h2>Test on {this.props.weapon} </h2></center>
         <div><button onClick={this.changeScreen}>Change Weapon</button></div>
+        <Details />
         <div id='questionContainer'>
           <p className="query">Question: {this.state.query}</p>
           <Options options={this.state.options} />

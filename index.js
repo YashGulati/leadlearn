@@ -39,11 +39,6 @@ app.get('/getQuestion', (req,res)=>{
   require('./dbs/getQuestion').renderQuestion(req, res);
 })
 
-app.get('/logout', (req,res)=>{
-  res.clearCookie('session', {path:'/'})
-  res.render('login', {loggedIn: 0, err: 0})
-})
-
 app.get('/dev', (req,res)=>{
   console.log(global);
   res.render('dev', { global: JSON.stringify(global) })
@@ -74,6 +69,24 @@ app.post('/addQuestion', (req,res)=>{
 
 app.post('/login', (req,res)=>{
   require('./login').login(req, res);
+})
+
+app.post('/logout', (req,res)=>{
+  console.log(req.body.cookie);
+  res.clearCookie('session', {path:'/'})
+  res.render('login', {loggedIn: 0, err: 0})
+  console.log("-> session log out: " + req.signedCookies.session);
+  user.update({cookie: req.signedCookies.session}, {
+    cookie: -1,
+  }, function(err, affected, resp) {
+     console.log(resp);
+  })
+})
+
+
+app.post('/getUsername', (req,res)=>{
+  require('./dbs/getUsername').getUsername(req, res);
+  // res.send('yo')
 })
 
 

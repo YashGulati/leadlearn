@@ -36,18 +36,23 @@ header .buttons {
   right: 0px;
   transform: translate(0%, -50%);
 }
-header .buttons a,
+header .buttons .profile {
+  display: none;
+  position: absolute;
+  height: 150px;
+  width: 100px;
+  background: rbga(20, 40, 100, 0.8);
+  z-index: 1;
+}
 header .buttons .button {
   border: none;
   padding: 10px;
-}
-header .buttons .button:nth-child(1) {
   background: rgba(0,0,0,0);
-}
-header .buttons a {
-  background: #008000;
   text-decoration: none;
   color: #fff;
+}
+header .buttons .button:nth-child(2) {
+  background: #008000;
 }
 button,
 select {
