@@ -1,0 +1,27 @@
+<!-- <div class="dashboard">
+  <% include header %>
+  <div class="left">
+    <div class="text">
+      <h1>Free and Open Source
+        <br>Technology Learning</h1>
+        <h2>Free Training | Certification | Community</h2>
+      </div>
+  </div>
+  <div class="right">
+    <div class="buttons">
+
+      <a href="/register">
+        <div id="joinBtn">
+          JOIN LEADLEARN
+        </div>
+      </a>
+      <a href="/login">
+        <div id="loginBtn">
+          LOGIN
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<% include need-help %>
+<% include footer %> -->

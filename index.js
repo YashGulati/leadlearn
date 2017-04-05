@@ -4,6 +4,7 @@ var stylus = require('express-stylus')
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 var global = require('./global')
+var morgan      = require('morgan');
 // database-------------
 var mongoose = require('mongoose')
 var mongoDB = 'mongodb://127.0.0.1:27017/leadlearn';
@@ -18,18 +19,20 @@ var cookieParser = require('cookie-parser')
 app.use(cookieParser('maybehere'))
 //----------------------
 
+// ejs templating
 app.set('view engine', 'ejs')
+// use morgan to log requests to the console
+app.use(morgan('dev'));
 
 
-app.get('/', (req, res)=>{ var loggedIn = 0
-  console.log('Signed Cookies: ', req.signedCookies)
-  if(req.signedCookies.session) loggedIn = 1
-  res.render('index', { loggedIn })
+
+app.get('/', (req, res)=>{
+  res.render('index')
 })
 
 app.use(stylus({
-  src: './stylus',
-  dest: './app',
+  src: './src',
+  dest: './src',
   debug: true,
   force: true
 }))
@@ -44,11 +47,11 @@ app.get('/dev', (req,res)=>{
   res.render('dev', { global: JSON.stringify(global) })
 })
 
-app.get('/*', (req, res)=>{ var loggedIn = 0
-  page = req.url.substring(1)
-  if(req.signedCookies.session) loggedIn = 1
-  res.render(page, {loggedIn, err: 0})
-})
+// app.get('/*', (req, res)=>{ var loggedIn = 0
+//   page = req.url.substring(1)
+//   if(req.signedCookies.session) loggedIn = 1
+//   res.render(page, {loggedIn, err: 0})
+// })
 
 app.post('/register', (req,res)=>{
   console.log(require('./dbs/addUser')(req.body));
@@ -72,15 +75,7 @@ app.post('/login', (req,res)=>{
 })
 
 app.post('/logout', (req,res)=>{
-  console.log(req.body.cookie);
-  res.clearCookie('session', {path:'/'})
-  res.render('login', {loggedIn: 0, err: 0})
-  console.log("-> session log out: " + req.signedCookies.session);
-  user.update({cookie: req.signedCookies.session}, {
-    cookie: -1,
-  }, function(err, affected, resp) {
-     console.log(resp);
-  })
+  require('./logout').logout(req, res);
 })
 
 
@@ -89,7 +84,9 @@ app.post('/getUsername', (req,res)=>{
   // res.send('yo')
 })
 
-
+app.get('/*', (req, res)=>{
+  res.render('index')
+})
 
 app.listen(80, ()=>{
   console.log("Listening on port 80...")

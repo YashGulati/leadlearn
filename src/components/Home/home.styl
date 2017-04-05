@@ -1,0 +1,50 @@
+div.background
+  height: 100vh
+  width: 100vw
+  position: absolute
+  z-index: -1
+  top: 0
+  background-image: url('/1-zVDcaM6mqhi9m0LP_Sq4Ag.jpeg')
+  background-size: cover
+
+.dashboard
+  height: 100%
+
+  overflow: hidden
+  .text
+    font-size: 1.2em
+    position: absolute;
+    left: 5%
+    top: 45%
+    transform: translate(0%,-50%);
+    h1
+      font-size: 2.8em
+  &>.right
+    width: 50%
+    height: 100%
+    position: relative;
+    float: right
+    &>.buttons
+      font-size: 1.2em
+      position: absolute;
+      left: 32%
+      top: 30%
+      transform: translate(-50%,-50%);
+      &>a
+        color: white
+        text-decoration: none
+        a, div
+          padding: 20px 60px
+          text-align: center;
+          height: 2em
+          margin: 40px
+          line-height: 200%
+        #joinBtn
+          background: green
+        #joinBtn:hover
+          background: darkgreen
+        #loginBtn
+          border: 2px solid green
+        #loginBtn:hover
+          border: 2px solid darkgreen
+          background: rgba(0,0,0,0.1)

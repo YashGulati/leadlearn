@@ -3,19 +3,20 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-      tests: './scripts/tests.js'
+      index: './src/index.js'
   },
   output: { path: path.join(__dirname, 'app/scripts'), filename: '[name].js' },
   module: {
     loaders: [
       {
-        test: /.jsx?$/,
+        test: /.js?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
           presets: ['es2015', 'react']
         }
-      }
+      },
+      { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' }
     ]
   },
 };

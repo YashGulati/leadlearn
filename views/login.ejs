@@ -11,7 +11,7 @@
     <form class="container" action="/login" method="post">
       <% if(loggedIn===1){ %>
         <h2>Woaah! You are logged In.</h2>
-        <center><h4><a href="/">Home</a> | <a href="/profile">Profile</a> | <a href="/logout">Log Out</a></h4></center>
+        <center><h4><a href="/">Home</a> | <a href="/profile">Profile</a> | <a href="/login" onclick="logout()">Log Out</a></h4></center>
       <% } else { %>
         <% if(err!=0){ %>
           <div class="err">

@@ -1,6 +1,6 @@
-<header>
-  <a href="http://leadlearn.tk"><img src="/l1.png" alt="" height="80px" /></a>
-  <ul>
+<!-- <header> -->
+  <!-- <a href="http://leadlearn.tk"><img src="/l1.png" alt="" height="80px" /></a> -->
+  <!-- <ul>
     <a href="/"><li>HOME</li></a>
     <li>COURSES</li>
     <a href="/tests"><li>TESTS</li></a>
@@ -8,8 +8,8 @@
     <li>EXPLORE</li>
     <li>BLOG</li>
     <li>TEAMS</li>
-  </ul>
-    <div class="buttons">
+  </ul> -->
+    <!-- <div class="buttons">
       <% if(loggedIn === 0){ %>
         <a name="button" class="button" href="/login">Log in</a>
         <a name="button" class="green" href="/register">REGISTER</a>
@@ -19,7 +19,7 @@
         <div class="profile"></div>
       <% } %>
     </div>
-</header>
+</header> -->
 <script type="text/javascript" src="/scripts/jquery-cookie.js"></script>
 <script type="text/javascript">
   function profile() {
@@ -31,9 +31,8 @@
   }
 
   function logout() {
-    // e.preventDefault();
+    $.removeCookie('session', { path: '/' });
     $.post('/logout',{cookie: $.cookie("session")},function(data) {
-      console.log("req sent");
     });
   }
 

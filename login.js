@@ -1,32 +1,59 @@
-var user = require('./dbs/userSchema')
-var global = require('./global')
-var user = require('./dbs/userSchema')
+var getUserData = require('./dbs/getUserData')
+
 var login = function(req, res){
-  if(req.body.username!="" || req.body.username!=0 ){
-    user.count({'username': req.body.username}, function (err, count){
-      if(count>0){
-        user.findOne({ 'username': req.body.username }, 'password', function(err, user){
-          console.log('-> database password for %s is %s', req.body.username, user.password)
-          if(user.password === req.body.password ){
-            loggedIn(req, res);
-          }
-          else{ console.log("-> Password Not Matched"); res.render('login', {loggedIn: 0, err: 'Password Not Matched'}); return; }
-        })
+  var username=req.body.username; var password=req.body.password;
+  console.log("-> Log in Performed: " + username + "|||" + password);
+
+  if(isLoggedIn(req, res)) {
+    res.render('login', {loggedIn: 1 ,err: 0});
+    console.log('Already Logged In'); return; } else console.log("Is not logged in.");
+
+  if(!isUserPassValid(username, password)) {
+    res.render('login', {loggedIn: 0 ,err: 'Invalid Username or Password'}); return; } else console.log("Valid UserPass");
+
+  getUserData.isUserExists(username, (is) => {
+    if(is) {
+      isMatchPassword(username, password), (is) => {
+          if(is)
+        res.render('login', {loggedIn: 0 ,err: 'Incorrect Password'});
+        else
+        res.render('login', {loggedIn: 0 ,err: 'Password Matched'});
       }
-      else if(count==0){ console.log('-> username not found'); res.render('login', {loggedIn: 0, err: 'username not found'}); return; }
-    });
+    }
+    else res.render('login', {loggedIn: 0 ,err: 'Username not found'});
   }
+
+  // user.findOne({ 'username': req.body.username }, 'password', function(err, user){
+  //   console.log('-> database password for %s is %s', req.body.username, user.password)
+  //     if(user.password === req.body.password ){
+  //       loggedIn(req, res);
+  //     }
+  //         else{ console.log("-> Password Not Matched"); res.render('login', {loggedIn: 0, err: 'Password Not Matched'}); return; }
+  //       })
+}
+
+var isLoggedIn = function(req, res) {
+  if (req.cookies.session) return 1; else return 0;
+}
+
+var isUserPassValid = function(username, password) {
+  if(username=="" || username==0) return 0
+  if(password=="" || password==0) return 0
+  return 1
+}
+
+var isMatchPassword = function(username, password) {
+  getUserData.matchUserPass(username, password, (matched) => {
+    if(matched) return 1;
+    else return 0;
+  })
 }
 
 function loggedIn(req, res) {
-  console.log('-> Password matched');
-  console.log("-> %s logged in Successfully.", req.body.username);
   userID = Math.floor(Math.random() * 90000);
 
-  global.loggedUsers.push({username: req.body.username, sessionID: userID})
-  user.update({username: req.body.username}, {
-    cookie: userID,
-  }, function(err, affected, resp) {
+  user.update({username: req.body.username}, { cookie: userID },
+    function(err, affected, resp) {
      console.log(resp);
   })
 

@@ -1,0 +1,2 @@
+Remove jquery
+Add all the models fro dbs to dbs/models
