@@ -1,27 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import HeaderLink from './HeaderLink'
 var abc = require('./header.styl');
 
 export default class Header extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-  componentDidMount() {
-    console.log(this.props);
-    console.log(abc);
+  constructor(props) {
+    super(props);
   }
+
   render() {
     return (
       <header>
-        <a href="http://leadlearn.tk"><img src="/l1.png" alt="leadlearn_logo" height="80px" /></a>
+        <Link to="http://leadlearn.tk"><img src="/l1.png" alt="leadlearn_logo" height="80px" /></Link>
         <ul>
-          <Link to="/"><li>HOME</li></Link>
-          <li>COURSES</li>
-          <Link to="/tests"><li>TESTS</li></Link>
-          <Link to="/chat"><li>CHAT</li></Link>
-          <li>EXPLORE</li>
-          <li>BLOG</li>
-          <li>TEAMS</li>
+          <HeaderLink history={this.props.history} >home</HeaderLink>
+          <HeaderLink history={this.props.history} >courses</HeaderLink>
+          <HeaderLink history={this.props.history} >tests</HeaderLink>
+          <HeaderLink history={this.props.history} >chat</HeaderLink>
+          <HeaderLink history={this.props.history} >explore</HeaderLink>
         </ul>
         {/* <div className="buttons"> */}
           {/* <% if(loggedIn === 0){ %>

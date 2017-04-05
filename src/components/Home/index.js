@@ -5,7 +5,9 @@ import styles from './home.styl';
 export default class Home extends Component {
   render() {
     return (
-      <Dashboard />
+      <div>
+        <Dashboard />
+      </div>
     )
   }
 }
