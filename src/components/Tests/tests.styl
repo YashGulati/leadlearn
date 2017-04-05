@@ -1,2 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Faster+One|Monofett')
 body
-  background-image: none
+  // background: #948E99; /* fallback for old browsers */
+  // background: -webkit-linear-gradient(to left, #948E99 , #2E1437); /* Chrome 10-25, Safari 5.1-6 */
+  // background: linear-gradient(to left, #948E99 , #2E1437); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+h1.testsHeading
+    font-family: 'Monofett', cursive
+    text-align: center
+    font-size: 5em
+    margin: 0px
+    margin-bottom: 30px
+.container
+  position:relative;
+  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  background: rgba(50,230,100,0.65)
+  padding: 50px
+  text-align: center
+  display: run-in;
+  margin: 0 auto
+  width: 25%
+
+  *
+    margin-top: 10px
+    padding: 10px
+  select
+    width: 100%
+    background: rgba(90,80,90,0.5)
+  button
+    color: white
+    text-decoration: none
+    margin: 10px
+    background: rgba(50,50,50,0.5)
+    border: none
+    &:hover
+      background: rgba(50,50,50,0.8)
+#questionContainer
+  border: 2px solid gray
+  width: 50%
+  margin: 0 auto
+  .query
+    font-size: 1.2em
+    padding: 5px
+    padding-left: 30px
+  .options
+    // background: red
+    .option
+      border: 1px solid #a9a9a9
+      padding: 10px
+      padding-left: 50px
+      &:hover
+        background: rgba(20,100,255,0.8)
+      &.selected
+        background: rgba(20,255,100,0.6)
+  button
+    padding: 10px 15px
+    background: green
