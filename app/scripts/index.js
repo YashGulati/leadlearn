@@ -30244,7 +30244,7 @@ exports = module.exports = __webpack_require__(37)(undefined);
 
 
 // module
-exports.push([module.i, ".rightToLeft-enter {\n  opacity: 0.01;\n}\n.rightToLeft-enter.rightToLeft-enter-active {\n  opacity: 1;\n  transition: opacity 500ms ease-in;\n}\n.rightToLeft-leave {\n  opacity: 1;\n}\n.rightToLeft-leave.rightToLeft-leave-active {\n  opacity: 0.01;\n  transition: opacity 300ms ease-in;\n}\n.rightToLeft-appear {\n  opacity: 0.01;\n}\n.rightToLeft-appear.rightToLeft-appear-active {\n  opacity: 1;\n  transition: opacity 0.5s ease-in;\n}\n", ""]);
+exports.push([module.i, ".rightToLeft-enter {\n  opacity: 0.01;\n}\n.rightToLeft-enter.rightToLeft-enter-active {\n  opacity: 1;\n  transition: opacity 5s ease-in;\n}\n.rightToLeft-leave {\n  opacity: 1;\n}\n.rightToLeft-leave.rightToLeft-leave-active {\n  opacity: 0.01;\n  transition: opacity 3s ease-in;\n}\n.rightToLeft-appear {\n  transform: translate3d(80%, 0, 0);\n}\n.rightToLeft-appear.rightToLeft-appear-active {\n  transform: translate3d(0%, 0, 0);\n  transition: all 0.1s linear;\n}\n", ""]);
 
 // exports
 

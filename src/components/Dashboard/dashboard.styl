@@ -4,7 +4,7 @@
 
 .rightToLeft-enter.rightToLeft-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 5s ease-in;
 }
 
 .rightToLeft-leave {
@@ -13,14 +13,14 @@
 
 .rightToLeft-leave.rightToLeft-leave-active {
   opacity: 0.01;
-  transition: opacity 300ms ease-in;
+  transition: opacity 3s ease-in;
 }
 
 .rightToLeft-appear {
-  opacity: 0.01;
+  transform: translate3d(80%, 0, 0);
 }
 
 .rightToLeft-appear.rightToLeft-appear-active {
-  opacity: 1;
-  transition: opacity .5s ease-in;
+  transform: translate3d(0%, 0, 0);
+  transition: all .1s linear;
 }
