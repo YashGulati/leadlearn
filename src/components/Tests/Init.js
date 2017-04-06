@@ -11,9 +11,8 @@ export default class Init extends Component {
 
   }
   onSubmit(e) {
-    console.log(e.target.value);
-    console.log(this.weapon);
-
+    if(!this.weapon) { console.log('Weapon not select and submitted'); return false; }
+    this.props.onSubmit(this.weapon);
   }
   render() {
     return (
