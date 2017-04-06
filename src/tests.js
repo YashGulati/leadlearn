@@ -13,10 +13,11 @@ class App extends React.Component {
     this.setState({screen: sc, weapon: weapon});
   }
   render() {
+    const { screen } = this.state;
     return (
       <div>
-        { this.state.screen==='1'?<Screen1 onSubmit={this.screenChange} />:"" }
-        { this.state.screen==='test'?<Test onSubmit={this.screenChange} weapon={this.state.weapon} />:"" }
+        { screen==='1'?<Screen1 onSubmit={this.screenChange} />:"" }
+        { screen==='test'?<Test onSubmit={this.screenChange} weapon={this.state.weapon} />:"" }
       </div>
     )
   }

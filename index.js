@@ -14,10 +14,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var user = require('./dbs/userSchema')
 //----------------------
 
-// cookies--------------
-var cookieParser = require('cookie-parser')
-app.use(cookieParser('maybehere'))
-//----------------------
+
 
 // ejs templating
 app.set('view engine', 'ejs')

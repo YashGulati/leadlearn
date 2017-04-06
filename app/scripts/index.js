@@ -13029,6 +13029,10 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Init = __webpack_require__(251);
+
+var _Init2 = _interopRequireDefault(_Init);
+
 var _tests = __webpack_require__(246);
 
 var _tests2 = _interopRequireDefault(_tests);
@@ -13041,16 +13045,19 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Dashboard = function (_Component) {
-  _inherits(Dashboard, _Component);
+var Tests = function (_Component) {
+  _inherits(Tests, _Component);
 
-  function Dashboard() {
-    _classCallCheck(this, Dashboard);
+  function Tests(props) {
+    _classCallCheck(this, Tests);
 
-    return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Tests.__proto__ || Object.getPrototypeOf(Tests)).call(this, props));
+
+    _this.weapon = '';
+    return _this;
   }
 
-  _createClass(Dashboard, [{
+  _createClass(Tests, [{
     key: 'onSubmit',
     value: function onSubmit(e) {
       e.preventDefault();
@@ -13061,66 +13068,15 @@ var Dashboard = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'h1',
-          { className: 'testsHeading' },
-          'Ready, Get Set Go!'
-        ),
-        _react2.default.createElement(
-          'form',
-          { className: 'container', onSubmit: this.onSubmit },
-          _react2.default.createElement(
-            'select',
-            { name: 'course', onChange: this.weaponChange },
-            _react2.default.createElement(
-              'option',
-              { disabled: true, selected: true, defaultValue: true, value: true },
-              ' -- Select your weapon -- '
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'python' },
-              'Python'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'java' },
-              'Java'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'js' },
-              'JavaScript'
-            ),
-            _react2.default.createElement(
-              'option',
-              { value: 'all' },
-              'All'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'buttons' },
-            _react2.default.createElement(
-              'button',
-              { type: 'submit', className: 'button' },
-              'TEST'
-            ),
-            _react2.default.createElement(
-              'button',
-              { type: 'button', className: 'button' },
-              'TEST ONLY'
-            )
-          )
-        )
+        _react2.default.createElement(_Init2.default, null)
       );
     }
   }]);
 
-  return Dashboard;
+  return Tests;
 }(_react.Component);
 
-exports.default = Dashboard;
+exports.default = Tests;
 
 /***/ }),
 /* 109 */
@@ -30274,6 +30230,125 @@ if(false) {
 	// When the module is disposed, remove the <style> tags
 	module.hot.dispose(function() { update(); });
 }
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _tests = __webpack_require__(246);
+
+var _tests2 = _interopRequireDefault(_tests);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Init = function (_Component) {
+  _inherits(Init, _Component);
+
+  function Init(props) {
+    _classCallCheck(this, Init);
+
+    var _this = _possibleConstructorReturn(this, (Init.__proto__ || Object.getPrototypeOf(Init)).call(this, props));
+
+    _this.onSubmit = _this.onSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(Init, [{
+    key: 'onChange',
+    value: function onChange(e) {
+      this.weapon = e.target.value;
+    }
+  }, {
+    key: 'onSubmit',
+    value: function onSubmit(e) {
+      console.log(e.target.value);
+      console.log(this.weapon);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'testsHeading' },
+          'Ready, Get Set Go!'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'select',
+            { name: 'course', onChange: this.onChange.bind(this) },
+            _react2.default.createElement(
+              'option',
+              { disabled: true, selected: true, defaultValue: true, value: true },
+              ' -- Select your weapon -- '
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: 'python' },
+              'Python'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: 'java' },
+              'Java'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: 'js' },
+              'JavaScript'
+            ),
+            _react2.default.createElement(
+              'option',
+              { value: 'all' },
+              'All'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'buttons' },
+            _react2.default.createElement(
+              'button',
+              { type: 'button', onClick: this.onSubmit, value: 'test', className: 'button' },
+              'TEST'
+            ),
+            _react2.default.createElement(
+              'button',
+              { type: 'button', onClick: this.onSubmit, value: 'testOnly ', className: 'button' },
+              'TEST ONLY'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Init;
+}(_react.Component);
+
+exports.default = Init;
 
 /***/ })
 /******/ ]);
