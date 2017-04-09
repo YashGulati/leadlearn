@@ -60,7 +60,7 @@ app.post('/register', (req,res)=>{
 app.post('/addQuestion', (req,res)=>{
   let data = Object.keys(req.body)[0];
   console.log(data);
-  var obj = JSON.parse(data);
+  let obj = JSON.parse(data);
   console.log(obj);
   question = {
     query: obj.query,
