@@ -13455,7 +13455,6 @@ var Test = function (_Component) {
     _this.state = {
       question: "Fetching Question...",
       options: []
-
     };
     _this.fetchQuestion();
     return _this;
@@ -13469,8 +13468,9 @@ var Test = function (_Component) {
       var myInit = { method: "GET" };
       fetch("/getQuestion", myInit).then(function (response) {
         return response.json();
-      }).then(function (data) {
-        console.log(data);
+      }).then(function (questions) {
+        console.log(questions);
+        var data = questions[0];
         _this2.setState({ question: data.query, options: data.options });
       });
     }

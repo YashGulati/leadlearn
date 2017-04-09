@@ -7,7 +7,6 @@ export default class Test extends Component {
     this.state = {
       question: "Fetching Question...",
       options: [],
-      
     }
     this.fetchQuestion();
   }
@@ -15,8 +14,9 @@ export default class Test extends Component {
     var myInit = { method: "GET" };
     fetch("/getQuestion", myInit).then((response) => {
       return response.json();
-    }).then((data) => {
-      console.log(data);
+    }).then((questions) => {
+      console.log(questions);
+      const data =  questions[0];
       this.setState({question: data.query, options: data.options});
     });
   }

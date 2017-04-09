@@ -17,7 +17,8 @@ class Test extends React.Component {
     this.props.onSubmit('1', '' )
   }
   fetchQuestion() { let that = this;
-    let url_ = "/getQuestion?weapon="+this.props.weapon
+    // let url_ = "/getQuestion?weapon="+this.props.weapon
+    let url_ = "/getQuestion";
     $.get(url_, function(data, status){
       that.setState({
         query: data.query,
