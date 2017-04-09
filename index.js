@@ -2,7 +2,8 @@ var express = require('express')
 var app = express()
 var stylus = require('express-stylus')
 var bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 var global = require('./global')
 var morgan      = require('morgan');
 var jwt = require('jsonwebtoken')
@@ -57,11 +58,15 @@ app.post('/register', (req,res)=>{
 })
 
 app.post('/addQuestion', (req,res)=>{
+  let data = Object.keys(req.body)[0];
+  console.log(data);
+  var obj = JSON.parse(data);
+  console.log(obj);
   question = {
-    query: req.body.query,
-    options: req.body.options.split('||'),
-    correctOp: req.body.correctOp,
-    tags: req.body.tags.split(' ')
+    query: obj.query,
+    options: obj.options.split('||'),
+    correctOp: obj.correctOp,
+    tags: obj.tags.split(' ')
   }
   console.log(question);
   console.log(require('./dbs/addQuestion')(question));
