@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 var global = require('./global')
 var morgan      = require('morgan');
+var jwt = require('jsonwebtoken')
 // database-------------
 var mongoose = require('mongoose')
 var mongoDB = 'mongodb://127.0.0.1:27017/leadlearn';

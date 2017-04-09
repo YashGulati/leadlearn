@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import WeaponSelect from './WeaponSelect'
 import styles from './tests.styl';
 
 export default class Init extends Component {
@@ -6,8 +7,8 @@ export default class Init extends Component {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
   }
-  onChange(e) {
-    this.weapon = e.target.value;
+  onChange(weapon) {
+    this.weapon = weapon;
 
   }
   onSubmit(e) {
@@ -19,13 +20,7 @@ export default class Init extends Component {
       <div>
         <h1 className='testsHeading'>Ready, Get Set Go!</h1>
         <div className="container">
-          <select name="course" onChange={this.onChange.bind(this)}>
-            <option disabled selected defaultValue value> -- Select your weapon -- </option>
-            <option value="python">Python</option>
-            <option value="java">Java</option>
-            <option value="js">JavaScript</option>
-            <option value="all">All</option>
-          </select>
+          <WeaponSelect weapons={this.props.weapons} onChange={this.onChange.bind(this)} />
           <div className="buttons">
             <button type="button" onClick={this.onSubmit} value="test" className="button">TEST</button>
             <button type="button" onClick={this.onSubmit} value="testOnly " className="button">TEST ONLY</button>
