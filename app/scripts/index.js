@@ -13601,9 +13601,13 @@ var Test = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).call(this, props));
 
     _this.state = {
+      questions: [],
       question: "Fetching Question...",
-      options: []
+      options: [],
+      qno: -1
     };
+    _this.fetchQuestion = _this.fetchQuestion.bind(_this);
+    _this.nextQuestion = _this.nextQuestion.bind(_this);
     _this.fetchQuestion();
     return _this;
   }
@@ -13618,9 +13622,23 @@ var Test = function (_Component) {
         return response.json();
       }).then(function (questions) {
         console.log(questions);
-        var data = questions[0];
-        _this2.setState({ question: data.query, options: data.options });
+        // const data =  questions[this.state.qno];
+        // this.setState({question: data.query, options: data.options});
+        _this2.setState({ questions: questions });
+        _this2.nextQuestion();
       });
+    }
+  }, {
+    key: "nextQuestion",
+    value: function nextQuestion() {
+      if (this.state.qno >= this.state.questions.length - 1) {
+        console.log('Questions Ended');return;
+      }
+      this.state.qno++;
+      var question = this.state.questions[this.state.qno];
+      console.log('question: ');
+      console.log(question);
+      this.setState({ question: question.query, options: question.options });
     }
   }, {
     key: "render",
@@ -13637,7 +13655,9 @@ var Test = function (_Component) {
         _react2.default.createElement(
           "p",
           null,
-          "Question: ",
+          "Question ",
+          this.state.qno + 1,
+          ": ",
           this.state.question
         ),
         _react2.default.createElement(
@@ -13650,6 +13670,11 @@ var Test = function (_Component) {
               option
             );
           })
+        ),
+        _react2.default.createElement(
+          "button",
+          { onClick: this.nextQuestion },
+          "Next"
         )
       );
     }

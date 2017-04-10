@@ -3,7 +3,7 @@ var question = require('./questionSchema')
 
 var renderQuestion = function(req, res){
   // const weapon = req.param('weapon')
-  question.findRandom().limit(1).exec(function (err, question) {
+  question.findRandom().limit(5).exec(function (err, question) {
   console.log(question);
   res.json(question)
 });
