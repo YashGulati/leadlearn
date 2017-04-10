@@ -13663,10 +13663,18 @@ var Test = function (_Component) {
     value: function submit() {
       console.log('Calculating result...');
       var wrong = 0,
-          right = 0;
+          right = 0,
+          notAttended = 0;
       for (var i = 0; i < this.state.questions.length; i++) {
         console.log(this.state.answers[i] + '||' + (this.state.questions[i].correctOp.charCodeAt(0) - 97));
+        if (this.state.answers[i] === -1) {
+          notAttended++;continue;
+        }
+        if (this.state.answers[i] === this.state.questions[i].correctOp.charCodeAt(0) - 97) right++;else wrong++;
       }
+      console.log('right->' + right);
+      console.log('wrong->' + wrong);
+      console.log('notAttended->' + notAttended);
     }
   }, {
     key: 'onOptionSelect',
