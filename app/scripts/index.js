@@ -13665,14 +13665,23 @@ var Test = function (_Component) {
         ),
         _react2.default.createElement(_Question2.default, { qno: this.state.qno, question: this.state.question, options: this.state.options }),
         _react2.default.createElement(
-          'button',
-          { className: 'questionSubmit', value: 'back', onClick: this.nextQuestion },
-          'Back'
-        ),
-        _react2.default.createElement(
-          'button',
-          { className: 'questionSubmit', value: 'next', onClick: this.nextQuestion },
-          'Next'
+          'div',
+          { className: 'questionNavBtns' },
+          _react2.default.createElement(
+            'button',
+            { className: 'questionNavBtn', value: 'next', onClick: this.nextQuestion },
+            'Next'
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'questionNavBtn', value: 'back', onClick: this.nextQuestion },
+            'Previous'
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'questionNavBtn', value: 'submit', onClick: this.nextQuestion },
+            'Submit'
+          )
         )
       );
     }
@@ -15883,7 +15892,7 @@ exports = module.exports = __webpack_require__(28)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Faster+One|Monofett);", ""]);
 
 // module
-exports.push([module.i, "h1.testsHeading {\n  font-family: 'Monofett', cursive;\n  text-align: center;\n  font-size: 5em;\n  margin: 0px;\n  margin-bottom: 30px;\n}\n.container {\n  position: relative;\n  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;\n  -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;\n  box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;\n  background: rgba(50,230,100,0.65);\n  padding: 50px;\n  text-align: center;\n  display: run-in;\n  margin: 0 auto;\n  width: 25%;\n}\n.container * {\n  margin-top: 10px;\n  padding: 10px;\n}\n.container select {\n  width: 100%;\n  background: rgba(90,80,90,0.5);\n}\n.container button {\n  color: #fff;\n  text-decoration: none;\n  margin: 10px;\n  background: rgba(50,50,50,0.5);\n  border: none;\n}\n.container button:hover {\n  background: rgba(50,50,50,0.8);\n}\n#questionContainer {\n  border: 2px solid #808080;\n  width: 50%;\n  margin: 0 auto;\n}\n#questionContainer .query {\n  font-size: 1.2em;\n  padding: 5px;\n  padding-left: 30px;\n}\n#questionContainer .options .option {\n  border: 1px solid #a9a9a9;\n  padding: 10px;\n  padding-left: 50px;\n}\n#questionContainer .options .option:hover {\n  background: rgba(20,100,255,0.8);\n}\n#questionContainer .options .option.selected {\n  background: rgba(20,255,100,0.6);\n}\n#questionContainer button {\n  padding: 10px 15px;\n  background: #008000;\n}\n", ""]);
+exports.push([module.i, "h1.testsHeading {\n  font-family: 'Monofett', cursive;\n  text-align: center;\n  font-size: 5em;\n  margin: 0px;\n  margin-bottom: 30px;\n  cursor: default;\n}\n.container {\n  position: relative;\n  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;\n  -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;\n  box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;\n  background: rgba(50,230,100,0.65);\n  padding: 50px;\n  text-align: center;\n  display: run-in;\n  margin: 0 auto;\n  width: 25%;\n}\n.container * {\n  margin-top: 10px;\n  padding: 10px;\n}\n.container select {\n  width: 100%;\n  background: rgba(90,80,90,0.5);\n}\n.container button {\n  color: #fff;\n  text-decoration: none;\n  margin: 10px;\n  background: rgba(50,50,50,0.5);\n  border: none;\n}\n.container button:hover {\n  background: rgba(50,50,50,0.8);\n}\n#questionContainer {\n  border: 2px solid #808080;\n  width: 50%;\n  margin: 0 auto;\n}\n#questionContainer .query {\n  font-size: 1.2em;\n  padding: 5px;\n  padding-left: 30px;\n}\n#questionContainer .options .option {\n  border: 1px solid #a9a9a9;\n  padding: 10px;\n  padding-left: 50px;\n}\n#questionContainer .options .option:hover {\n  background: rgba(20,100,255,0.8);\n}\n#questionContainer .options .option.selected {\n  background: rgba(20,255,100,0.6);\n}\n#questionContainer button {\n  padding: 10px 15px;\n  background: #008000;\n}\n", ""]);
 
 // exports
 
@@ -15897,7 +15906,7 @@ exports = module.exports = __webpack_require__(28)(undefined);
 exports.push([module.i, "@import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css);", ""]);
 
 // module
-exports.push([module.i, "button,\nselect {\n  cursor: pointer;\n  color: #fff;\n  border: none;\n}\n.green {\n  background: #008000;\n  font-weight: bold;\n}\nbutton:focus,\nselect:focus {\n  outline: none;\n}\nhtml,\nbody {\n  height: 100%;\n}\nbody {\n  background: #292929;\n  font-family: 'Open Sans', sans-serif;\n  color: #fff;\n  margin: 0;\n}\n#needHelp {\n  border: 1px solid #fff;\n  position: fixed;\n  right: 25px;\n  bottom: 25px;\n  font-size: 1em;\n  padding: 10px;\n}\nheader {\n  position: relative;\n  font-weight: bolder;\n  background: linear-gradient(rgba(0,0,0,0.6), rgba(255,255,255,0));\n  padding: 30px;\n  padding-bottom: 40px;\n}\nheader img {\n  height: 2.5em;\n  float: left;\n  display: inline;\n}\nheader ul {\n  font-weight: bolder;\n  display: inline;\n  margin: 0 10px;\n  list-style: none;\n}\nheader ul a {\n  text-decoration: none;\n  color: #fff;\n}\nheader ul li {\n  text-transform: uppercase;\n  cursor: pointer;\n  vertical-align: middle;\n  display: inline;\n  padding: 20px;\n}\nheader ul li:hover {\n  background: #808080;\n}\nheader .buttons {\n  position: absolute;\n  top: 50%;\n  right: 0px;\n  transform: translate(0%, -50%);\n}\nheader .buttons .profile {\n  display: none;\n  position: absolute;\n  height: 150px;\n  width: 100px;\n  background: rbga(20, 40, 100, 0.8);\n  z-index: 1;\n}\nheader .buttons .button {\n  border: none;\n  padding: 10px;\n  background: rgba(0,0,0,0);\n  text-decoration: none;\n  color: #fff;\n}\nheader .buttons .button:nth-child(2) {\n  background: #008000;\n}\n", ""]);
+exports.push([module.i, "* {\n  user-select: none;\n}\nbutton,\nselect {\n  cursor: pointer;\n  color: #fff;\n  border: none;\n}\n.green {\n  background: #008000;\n  font-weight: bold;\n}\nbutton:focus,\nselect:focus {\n  outline: none;\n}\nhtml,\nbody {\n  height: 100%;\n}\nbody {\n  background: #292929;\n  font-family: 'Open Sans', sans-serif;\n  color: #fff;\n  margin: 0;\n}\n#needHelp {\n  border: 1px solid #fff;\n  position: fixed;\n  right: 25px;\n  bottom: 25px;\n  font-size: 1em;\n  padding: 10px;\n}\nheader {\n  position: relative;\n  font-weight: bolder;\n  background: linear-gradient(rgba(0,0,0,0.6), rgba(255,255,255,0));\n  padding: 30px;\n  padding-bottom: 40px;\n}\nheader img {\n  height: 2.5em;\n  float: left;\n  display: inline;\n}\nheader ul {\n  font-weight: bolder;\n  display: inline;\n  margin: 0 10px;\n  list-style: none;\n}\nheader ul a {\n  text-decoration: none;\n  color: #fff;\n}\nheader ul li {\n  text-transform: uppercase;\n  cursor: pointer;\n  vertical-align: middle;\n  display: inline;\n  padding: 20px;\n}\nheader ul li:hover {\n  background: #808080;\n}\nheader .buttons {\n  position: absolute;\n  top: 50%;\n  right: 0px;\n  transform: translate(0%, -50%);\n}\nheader .buttons .profile {\n  display: none;\n  position: absolute;\n  height: 150px;\n  width: 100px;\n  background: rbga(20, 40, 100, 0.8);\n  z-index: 1;\n}\nheader .buttons .button {\n  border: none;\n  padding: 10px;\n  background: rgba(0,0,0,0);\n  text-decoration: none;\n  color: #fff;\n}\nheader .buttons .button:nth-child(2) {\n  background: #008000;\n}\n", ""]);
 
 // exports
 
@@ -30796,7 +30805,7 @@ exports = module.exports = __webpack_require__(28)(undefined);
 
 
 // module
-exports.push([module.i, "ul.options {\n  list-style: none;\n  width: 100%;\n  margin: 0 auto;\n}\nli.option {\n  width: 85%;\n  font-size: 1.1em;\n  margin: 20px auto;\n  padding: 10px;\n  background: rgba(90,90,90,0.8);\n  cursor: pointer;\n  border: 2px solid rgba(90,90,90,0.8);\n}\nli.option:hover {\n  border: 2px solid #008000;\n}\n", ""]);
+exports.push([module.i, "ul.options {\n  list-style: none;\n  width: 100%;\n  margin: 0 auto;\n}\nli.option {\n  width: 85%;\n  font-size: 1.1em;\n  margin: 20px auto;\n  padding: 10px;\n  background: rgba(90,90,90,0.8);\n  cursor: pointer;\n  border: 3px solid rgba(90,90,90,0.8);\n}\nli.option:hover {\n  border: 3px solid #008000;\n}\n", ""]);
 
 // exports
 
@@ -30942,7 +30951,7 @@ exports = module.exports = __webpack_require__(28)(undefined);
 
 
 // module
-exports.push([module.i, ".questionSubmit {\n  margin: 0 32%;\n  border: 2px solid #333;\n}\n.questionSubmit:hover {\n  color: #808080;\n  border: 2px solid #808080;\n}\n", ""]);
+exports.push([module.i, ".questionNavBtns {\n  width: 50%;\n  position: relative;\n  margin: 0 auto;\n}\n.questionNavBtn {\n  position: relative;\n  left: 100px;\n  margin-right: 5px;\n  border: 2px solid #333;\n}\n.questionNavBtn:hover {\n  color: #808080;\n  border: 2px solid #808080;\n}\n", ""]);
 
 // exports
 

@@ -43,8 +43,11 @@ export default class Test extends Component {
       <div>
         <h1>Test for {this.props.weapon}</h1>
         <Question qno={this.state.qno} question={this.state.question} options={this.state.options} />
-        <button className="questionSubmit" value='back' onClick={this.nextQuestion}>Back</button>
-        <button className="questionSubmit" value='next' onClick={this.nextQuestion}>Next</button>
+        <div className='questionNavBtns'>
+          <button className="questionNavBtn" value='next' onClick={this.nextQuestion}>Next</button>
+          <button className="questionNavBtn" value='back' onClick={this.nextQuestion}>Previous</button>
+          <button className="questionNavBtn" value='submit' onClick={this.nextQuestion}>Submit</button>
+        </div>
       </div>
     )
   }
