@@ -16,6 +16,7 @@ export default class Test extends Component {
     this.fetchQuestion = this.fetchQuestion.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.onOptionSelect = this.onOptionSelect.bind(this);
+    this.submit = this.submit.bind(this);
     this.fetchQuestion();
   }
   fetchQuestion() {
@@ -44,6 +45,10 @@ export default class Test extends Component {
   }
   submit() {
     console.log('Calculating result...');
+    let wrong=0, right=0;
+    for (var i=0; i<this.state.questions.length;i++) {
+      console.log(this.state.answers[i] + '||' + (this.state.questions[i].correctOp.charCodeAt(0) - 97));
+    }
   }
   onOptionSelect(e) {
     const answers = this.state.answers;

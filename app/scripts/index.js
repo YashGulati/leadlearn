@@ -13620,6 +13620,7 @@ var Test = function (_Component) {
     _this.fetchQuestion = _this.fetchQuestion.bind(_this);
     _this.nextQuestion = _this.nextQuestion.bind(_this);
     _this.onOptionSelect = _this.onOptionSelect.bind(_this);
+    _this.submit = _this.submit.bind(_this);
     _this.fetchQuestion();
     return _this;
   }
@@ -13661,6 +13662,11 @@ var Test = function (_Component) {
     key: 'submit',
     value: function submit() {
       console.log('Calculating result...');
+      var wrong = 0,
+          right = 0;
+      for (var i = 0; i < this.state.questions.length; i++) {
+        console.log(this.state.answers[i] + '||' + (this.state.questions[i].correctOp.charCodeAt(0) - 97));
+      }
     }
   }, {
     key: 'onOptionSelect',
