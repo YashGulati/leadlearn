@@ -28,7 +28,7 @@ export default class Test extends Component {
   }
   nextQuestion(e) { const action = e.target.value;
     console.log(action);
-    if (this.state.qno >= this.state.questions.length -1 || ( this.state.qno === 0 && action === 'back' )) {
+    if ((this.state.qno >= this.state.questions.length -1 && action==='next' ) || ( this.state.qno === 0 && action === 'back' )) {
       console.log('Questions Ended'); return;
     }
 

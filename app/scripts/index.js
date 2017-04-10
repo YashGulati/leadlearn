@@ -13641,7 +13641,7 @@ var Test = function (_Component) {
     value: function nextQuestion(e) {
       var action = e.target.value;
       console.log(action);
-      if (this.state.qno >= this.state.questions.length - 1 || this.state.qno === 0 && action === 'back') {
+      if (this.state.qno >= this.state.questions.length - 1 && action === 'next' || this.state.qno === 0 && action === 'back') {
         console.log('Questions Ended');return;
       }
 
