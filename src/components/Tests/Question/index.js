@@ -7,7 +7,10 @@ export default class Question extends Component {
     return (
       <div className="question">
         <p className="query">Question {this.props.qno + 1}: {this.props.question}</p>
-        <Options options={this.props.options} />
+        <Options
+          onOptionSelect={this.props.onOptionSelect}
+          options={this.props.options}
+          selected={this.props.selected} />
       </div>
     )
   }

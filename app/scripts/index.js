@@ -13616,8 +13616,10 @@ var Test = function (_Component) {
       options: [],
       qno: -1
     };
+    _this.state.answers = [];
     _this.fetchQuestion = _this.fetchQuestion.bind(_this);
     _this.nextQuestion = _this.nextQuestion.bind(_this);
+    _this.onOptionSelect = _this.onOptionSelect.bind(_this);
     _this.fetchQuestion();
     return _this;
   }
@@ -13632,6 +13634,9 @@ var Test = function (_Component) {
         return response.json();
       }).then(function (questions) {
         console.log(questions);
+        for (var i = 0; i < questions.length; i++) {
+          _this2.state.answers.push(-1);
+        }
         _this2.setState({ questions: questions });
         _this2.nextQuestion({ target: { value: 'next' } });
       });
@@ -13641,6 +13646,7 @@ var Test = function (_Component) {
     value: function nextQuestion(e) {
       var action = e.target.value;
       console.log(action);
+      console.log(this.state.answers);
       if (this.state.qno >= this.state.questions.length - 1 && action === 'next' || this.state.qno === 0 && action === 'back') {
         console.log('Questions Ended');return;
       }
@@ -13650,6 +13656,18 @@ var Test = function (_Component) {
       console.log('question: ');
       console.log(question);
       this.setState({ question: question.query, options: question.options });
+    }
+  }, {
+    key: 'submit',
+    value: function submit() {
+      console.log('Calculating result...');
+    }
+  }, {
+    key: 'onOptionSelect',
+    value: function onOptionSelect(e) {
+      var answers = this.state.answers;
+      answers[this.state.qno] = e.target.value;
+      this.setState({ answers: answers });
     }
   }, {
     key: 'render',
@@ -13663,7 +13681,12 @@ var Test = function (_Component) {
           'Test for ',
           this.props.weapon
         ),
-        _react2.default.createElement(_Question2.default, { qno: this.state.qno, question: this.state.question, options: this.state.options }),
+        _react2.default.createElement(_Question2.default, {
+          onOptionSelect: this.onOptionSelect,
+          qno: this.state.qno,
+          question: this.state.question,
+          options: this.state.options,
+          selected: this.state.answers[this.state.qno] }),
         _react2.default.createElement(
           'div',
           { className: 'questionNavBtns' },
@@ -13679,7 +13702,7 @@ var Test = function (_Component) {
           ),
           _react2.default.createElement(
             'button',
-            { className: 'questionNavBtn', value: 'submit', onClick: this.nextQuestion },
+            { className: 'questionNavBtn', value: 'submit', onClick: this.submit },
             'Submit'
           )
         )
@@ -30767,23 +30790,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Options = function (_Component) {
   _inherits(Options, _Component);
 
-  function Options() {
+  function Options(props) {
     _classCallCheck(this, Options);
 
-    return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+    _this.onOptionSelect = _this.onOptionSelect.bind(_this);
+    return _this;
   }
 
   _createClass(Options, [{
+    key: 'onOptionSelect',
+    value: function onOptionSelect(e) {
+      this.props.onOptionSelect(e.target.value);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
 
       return _react2.default.createElement(
         'ul',
         { className: 'options' },
         this.props.options.map(function (option, idx) {
+          var selected = _this2.props.selected === idx ? 'selected' : '';
           return _react2.default.createElement(
             'li',
-            { className: 'option', key: idx },
+            { className: 'option ' + selected, onClick: _this2.props.onOptionSelect, value: idx, key: idx },
             option
           );
         })
@@ -30805,7 +30838,7 @@ exports = module.exports = __webpack_require__(28)(undefined);
 
 
 // module
-exports.push([module.i, "ul.options {\n  list-style: none;\n  width: 100%;\n  margin: 0 auto;\n}\nli.option {\n  width: 85%;\n  font-size: 1.1em;\n  margin: 20px auto;\n  padding: 10px;\n  background: rgba(90,90,90,0.8);\n  cursor: pointer;\n  border: 3px solid rgba(90,90,90,0.8);\n}\nli.option:hover {\n  border: 3px solid #008000;\n}\n", ""]);
+exports.push([module.i, "ul.options {\n  list-style: none;\n  width: 100%;\n  margin: 0 auto;\n}\nli.option {\n  width: 85%;\n  font-size: 1.1em;\n  margin: 20px auto;\n  padding: 10px;\n  background: rgba(90,90,90,0.8);\n  cursor: pointer;\n  border: 3px solid rgba(90,90,90,0.8);\n}\nli.option:hover {\n  border: 3px solid #008000;\n}\n.option.selected {\n  background: #008000;\n}\n", ""]);
 
 // exports
 
@@ -30892,7 +30925,10 @@ var Question = function (_Component) {
           ': ',
           this.props.question
         ),
-        _react2.default.createElement(_Options2.default, { options: this.props.options })
+        _react2.default.createElement(_Options2.default, {
+          onOptionSelect: this.props.onOptionSelect,
+          options: this.props.options,
+          selected: this.props.selected })
       );
     }
   }]);

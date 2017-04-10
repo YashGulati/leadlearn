@@ -12,8 +12,10 @@ export default class Test extends Component {
       options: [],
       qno: -1
     }
+    this.state.answers = [];
     this.fetchQuestion = this.fetchQuestion.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
+    this.onOptionSelect = this.onOptionSelect.bind(this);
     this.fetchQuestion();
   }
   fetchQuestion() {
@@ -22,12 +24,14 @@ export default class Test extends Component {
       return response.json();
     }).then((questions) => {
       console.log(questions);
+      for (var i = 0; i < questions.length; i++) { this.state.answers.push(-1) }
       this.setState({questions});
       this.nextQuestion({ target: { value: 'next' } });
     });
   }
   nextQuestion(e) { const action = e.target.value;
     console.log(action);
+    console.log(this.state.answers);
     if ((this.state.qno >= this.state.questions.length -1 && action==='next' ) || ( this.state.qno === 0 && action === 'back' )) {
       console.log('Questions Ended'); return;
     }
@@ -38,15 +42,28 @@ export default class Test extends Component {
     console.log(question);
     this.setState({question: question.query, options: question.options});
   }
+  submit() {
+    console.log('Calculating result...');
+  }
+  onOptionSelect(e) {
+    const answers = this.state.answers;
+    answers[this.state.qno] = e.target.value;
+    this.setState({answers})
+  }
   render() {
     return (
       <div>
         <h1>Test for {this.props.weapon}</h1>
-        <Question qno={this.state.qno} question={this.state.question} options={this.state.options} />
+        <Question
+          onOptionSelect={this.onOptionSelect}
+          qno={this.state.qno}
+          question={this.state.question}
+          options={this.state.options}
+          selected={this.state.answers[this.state.qno]} />
         <div className='questionNavBtns'>
           <button className="questionNavBtn" value='next' onClick={this.nextQuestion}>Next</button>
           <button className="questionNavBtn" value='back' onClick={this.nextQuestion}>Previous</button>
-          <button className="questionNavBtn" value='submit' onClick={this.nextQuestion}>Submit</button>
+          <button className="questionNavBtn" value='submit' onClick={this.submit}>Submit</button>
         </div>
       </div>
     )
