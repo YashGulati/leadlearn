@@ -23,11 +23,16 @@ export default class Test extends Component {
     }).then((questions) => {
       console.log(questions);
       this.setState({questions});
-      this.nextQuestion();
+      this.nextQuestion({ target: { value: 'next' } });
     });
   }
-  nextQuestion() { if (this.state.qno >= this.state.questions.length -1){ console.log('Questions Ended'); return; }
-    this.state.qno++;
+  nextQuestion(e) { const action = e.target.value;
+    console.log(action);
+    if (this.state.qno >= this.state.questions.length -1 || ( this.state.qno === 0 && action === 'back' )) {
+      console.log('Questions Ended'); return;
+    }
+
+    (action === 'next')?this.state.qno++ : this.state.qno--;
     const question = this.state.questions[this.state.qno];
     console.log('question: ');
     console.log(question);
@@ -38,7 +43,8 @@ export default class Test extends Component {
       <div>
         <h1>Test for {this.props.weapon}</h1>
         <Question qno={this.state.qno} question={this.state.question} options={this.state.options} />
-        <button className="questionSubmit" onClick={this.nextQuestion}>Next</button>
+        <button className="questionSubmit" value='back' onClick={this.nextQuestion}>Back</button>
+        <button className="questionSubmit" value='next' onClick={this.nextQuestion}>Next</button>
       </div>
     )
   }

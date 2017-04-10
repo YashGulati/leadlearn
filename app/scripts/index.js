@@ -13633,16 +13633,19 @@ var Test = function (_Component) {
       }).then(function (questions) {
         console.log(questions);
         _this2.setState({ questions: questions });
-        _this2.nextQuestion();
+        _this2.nextQuestion({ target: { value: 'next' } });
       });
     }
   }, {
     key: 'nextQuestion',
-    value: function nextQuestion() {
-      if (this.state.qno >= this.state.questions.length - 1) {
+    value: function nextQuestion(e) {
+      var action = e.target.value;
+      console.log(action);
+      if (this.state.qno >= this.state.questions.length - 1 || this.state.qno === 0 && action === 'back') {
         console.log('Questions Ended');return;
       }
-      this.state.qno++;
+
+      action === 'next' ? this.state.qno++ : this.state.qno--;
       var question = this.state.questions[this.state.qno];
       console.log('question: ');
       console.log(question);
@@ -13663,7 +13666,12 @@ var Test = function (_Component) {
         _react2.default.createElement(_Question2.default, { qno: this.state.qno, question: this.state.question, options: this.state.options }),
         _react2.default.createElement(
           'button',
-          { className: 'questionSubmit', onClick: this.nextQuestion },
+          { className: 'questionSubmit', value: 'back', onClick: this.nextQuestion },
+          'Back'
+        ),
+        _react2.default.createElement(
+          'button',
+          { className: 'questionSubmit', value: 'next', onClick: this.nextQuestion },
           'Next'
         )
       );
