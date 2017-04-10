@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-// import styles from './tests.styl';
+import Question from '../Question'
+import Options from '../Options'
+import styles from './test.styl';
 
 export default class Test extends Component {
   constructor(props) {
@@ -20,8 +22,6 @@ export default class Test extends Component {
       return response.json();
     }).then((questions) => {
       console.log(questions);
-      // const data =  questions[this.state.qno];
-      // this.setState({question: data.query, options: data.options});
       this.setState({questions});
       this.nextQuestion();
     });
@@ -37,15 +37,8 @@ export default class Test extends Component {
     return (
       <div>
         <h1>Test for {this.props.weapon}</h1>
-        <p>Question {this.state.qno + 1}: {this.state.question}</p>
-        <ul>
-        {
-          this.state.options.map((option, idx) => {
-            return <li key={idx}>{option}</li>
-          })
-        }
-      </ul>
-      <button onClick={this.nextQuestion}>Next</button>
+        <Question qno={this.state.qno} question={this.state.question} options={this.state.options} />
+        <button className="questionSubmit" onClick={this.nextQuestion}>Next</button>
       </div>
     )
   }
