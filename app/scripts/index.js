@@ -31109,8 +31109,16 @@ var Result = function (_Component) {
           wrong = _props.wrong,
           unAttended = _props.unAttended,
           totalQuestions = right + wrong + unAttended,
-          percentage = (right * 100 / totalQuestions).toFixed(1);
+          percentage = (right * 100 / totalQuestions).toFixed(1),
+          percentageColor = percentage >= 50 ? 'green' : 'red';
 
+
+      var remarks = '';
+      var remarksClass = void 0;
+      if (percentage == 100) {
+        remarks = 'Perfect!';
+        remarksClass = 'green';
+      }
       return _react2.default.createElement(
         'div',
         { className: 'result' },
@@ -31165,9 +31173,14 @@ var Result = function (_Component) {
           'Percentage: ',
           _react2.default.createElement(
             'span',
-            null,
+            { style: { color: percentageColor } },
             percentage
           )
+        ),
+        _react2.default.createElement(
+          'h2',
+          { className: "remarks " + remarksClass },
+          remarks
         )
       );
     }
@@ -31187,7 +31200,7 @@ exports = module.exports = __webpack_require__(16)(undefined);
 
 
 // module
-exports.push([module.i, ".result {\n  cursor: default;\n  background: #808080;\n  width: 300px;\n  margin: 0 auto;\n  padding: 15px 70px;\n}\n.result p span {\n  float: right;\n  margin-right: 40px;\n}\n.result .resultHeading {\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, ".result {\n  cursor: default;\n  background: #808080;\n  width: 300px;\n  margin: 0 auto;\n  padding: 15px 70px;\n}\n.result p span {\n  float: right;\n  margin-right: 40px;\n}\n.result .resultHeading {\n  text-align: center;\n}\n.remarks {\n  text-align: center;\n}\n.remarks.green {\n  background: #008000;\n}\n", ""]);
 
 // exports
 
