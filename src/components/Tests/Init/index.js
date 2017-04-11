@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import WeaponSelect from './WeaponSelect'
-import styles from './tests.styl';
+import WeaponSelect from '../WeaponSelect'
+import styles from '../tests.styl';
 
 export default class Init extends Component {
   constructor(props) {

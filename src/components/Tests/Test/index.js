@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Question from '../Question'
 import Options from '../Options'
+import Result from '../Result'
 import styles from './test.styl';
 
 export default class Test extends Component {
@@ -10,7 +11,13 @@ export default class Test extends Component {
       questions: [],
       question: "Fetching Question...",
       options: [],
-      qno: -1
+      qno: -1,
+      showResult: false,
+      result: {
+        right: 0,
+        wrong: 0,
+        unAttended: 0
+      }
     }
     this.state.answers = [];
     this.fetchQuestion = this.fetchQuestion.bind(this);
@@ -45,10 +52,10 @@ export default class Test extends Component {
   }
   submit() {
     console.log('Calculating result...');
-    let wrong=0, right=0, notAttended=0;
+    let wrong=0, right=0, unAttended=0;
     for (var i=0; i<this.state.questions.length;i++) {
       console.log(this.state.answers[i] + '||' + (this.state.questions[i].correctOp.charCodeAt(0) - 97));
-      if (this.state.answers[i] === -1) { notAttended++; continue; }
+      if (this.state.answers[i] === -1) { unAttended++; continue; }
       if (this.state.answers[i] === (this.state.questions[i].correctOp.charCodeAt(0) - 97))
         right++;
       else
@@ -56,7 +63,13 @@ export default class Test extends Component {
     }
     console.log('right->' + right);
     console.log('wrong->' + wrong);
-    console.log('notAttended->' + notAttended);
+    console.log('unAttended->' + unAttended);
+    this.setState({
+      result: {
+        right, wrong, unAttended
+      }
+    })
+    this.setState({showResult: true})
   }
   onOptionSelect(e) {
     const answers = this.state.answers;
@@ -64,6 +77,7 @@ export default class Test extends Component {
     this.setState({answers})
   }
   render() {
+    if (this.state.showResult) return <Result {...this.state.result} />
     return (
       <div>
         <h1>Test for {this.props.weapon}</h1>
