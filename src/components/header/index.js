@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import HeaderLink from './HeaderLink'
-var abc = require('./header.styl');
+var styles = require('./header.styl');
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 export default class Header extends Component {
   constructor(props) {
@@ -12,15 +12,13 @@ export default class Header extends Component {
   render() {
     return (
       <header>
-        <Link to="http://leadlearn.tk"><img src="/l1.png" alt="leadlearn_logo" height="80px" /></Link>
+        <Link to="/"><img src="/l1.png" alt="leadlearn_logo" height="80px" /></Link>
         <ul>
-
           <HeaderLink history={this.props.history} >home</HeaderLink>
           <HeaderLink history={this.props.history} >courses</HeaderLink>
           <HeaderLink history={this.props.history} >tests</HeaderLink>
           <HeaderLink history={this.props.history} >chat</HeaderLink>
           <HeaderLink history={this.props.history} >explore</HeaderLink>
-      
         </ul>
         {/* <div className="buttons"> */}
           {/* <% if(loggedIn === 0){ %>
