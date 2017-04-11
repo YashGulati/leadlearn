@@ -31093,7 +31093,9 @@ var Result = function (_Component) {
       var _props = this.props,
           right = _props.right,
           wrong = _props.wrong,
-          unAttended = _props.unAttended;
+          unAttended = _props.unAttended,
+          totalQuestions = right + wrong + unAttended,
+          percentage = (right * 100 / totalQuestions).toFixed(1);
 
       return _react2.default.createElement(
         'div',
@@ -31110,7 +31112,7 @@ var Result = function (_Component) {
           _react2.default.createElement(
             'span',
             null,
-            right + wrong + unAttended
+            totalQuestions
           )
         ),
         _react2.default.createElement(
@@ -31141,6 +31143,16 @@ var Result = function (_Component) {
             'span',
             null,
             unAttended
+          )
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Percentage: ',
+          _react2.default.createElement(
+            'span',
+            null,
+            percentage
           )
         )
       );
