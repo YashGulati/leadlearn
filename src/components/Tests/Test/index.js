@@ -71,6 +71,9 @@ export default class Test extends Component {
     })
     this.setState({showResult: true})
   }
+  cancel() {
+
+  }
   onOptionSelect(e) {
     const answers = this.state.answers;
     answers[this.state.qno] = e.target.value;
@@ -88,9 +91,10 @@ export default class Test extends Component {
           options={this.state.options}
           selected={this.state.answers[this.state.qno]} />
         <div className='questionNavBtns'>
-          <button className="questionNavBtn" value='next' onClick={this.nextQuestion}>Next</button>
-          <button className="questionNavBtn" value='back' onClick={this.nextQuestion}>Previous</button>
-          <button className="questionNavBtn" value='submit' onClick={this.submit}>Submit</button>
+          <button className="questionNavBtn left" value='next' onClick={this.nextQuestion}>Next</button>
+          <button className="questionNavBtn left" value='back' onClick={this.nextQuestion}>Previous</button>
+          <button className="questionNavBtn right" value='cancel' onClick={this.props.onCancel}>Cancel Test</button>
+          <button className="questionNavBtn right" value='submit' onClick={this.submit}>Submit</button>
         </div>
       </div>
     )

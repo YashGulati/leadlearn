@@ -13285,6 +13285,7 @@ var Tests = function (_Component) {
     _this.weapons = [{ name: 'Python', symbol: 'python' }, { name: 'Java', symbol: 'java' }, { name: 'JavaScript', symbol: 'js' }, { name: 'All', symbol: 'all' }];
     _this.state = { weapon: '' };
     _this.startTest = _this.startTest.bind(_this);
+    _this.onCancel = _this.onCancel.bind(_this);
     return _this;
   }
 
@@ -13294,12 +13295,17 @@ var Tests = function (_Component) {
       this.setState({ weapon: weapon });
     }
   }, {
+    key: 'onCancel',
+    value: function onCancel() {
+      this.setState({ weapon: '' });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var markup = void 0;
       if (this.state.weapon === '') markup = _react2.default.createElement(_Init2.default, { onSubmit: this.startTest, weapons: this.weapons });else if (this.weapons.map(function (e) {
         return e.symbol;
-      }).indexOf(this.state.weapon) > -1) markup = _react2.default.createElement(_Test2.default, { weapon: this.state.weapon });else markup = _react2.default.createElement(
+      }).indexOf(this.state.weapon) > -1) markup = _react2.default.createElement(_Test2.default, { weapon: this.state.weapon, onCancel: this.onCancel });else markup = _react2.default.createElement(
         'h1',
         null,
         'Error no weapon'
@@ -13807,6 +13813,9 @@ var Test = function (_Component) {
       this.setState({ showResult: true });
     }
   }, {
+    key: 'cancel',
+    value: function cancel() {}
+  }, {
     key: 'onOptionSelect',
     value: function onOptionSelect(e) {
       var answers = this.state.answers;
@@ -13837,17 +13846,22 @@ var Test = function (_Component) {
           { className: 'questionNavBtns' },
           _react2.default.createElement(
             'button',
-            { className: 'questionNavBtn', value: 'next', onClick: this.nextQuestion },
+            { className: 'questionNavBtn left', value: 'next', onClick: this.nextQuestion },
             'Next'
           ),
           _react2.default.createElement(
             'button',
-            { className: 'questionNavBtn', value: 'back', onClick: this.nextQuestion },
+            { className: 'questionNavBtn left', value: 'back', onClick: this.nextQuestion },
             'Previous'
           ),
           _react2.default.createElement(
             'button',
-            { className: 'questionNavBtn', value: 'submit', onClick: this.submit },
+            { className: 'questionNavBtn right', value: 'cancel', onClick: this.props.onCancel },
+            'Cancel Test'
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'questionNavBtn right', value: 'submit', onClick: this.submit },
             'Submit'
           )
         )
@@ -16015,7 +16029,7 @@ exports = module.exports = __webpack_require__(16)(undefined);
 
 
 // module
-exports.push([module.i, ".questionNavBtns {\n  width: 50%;\n  position: relative;\n  margin: 0 auto;\n}\n.questionNavBtn {\n  position: relative;\n  left: 100px;\n  margin-right: 5px;\n  border: 2px solid #333;\n}\n.questionNavBtn:hover {\n  color: #808080;\n  border: 2px solid #808080;\n}\n", ""]);
+exports.push([module.i, ".questionNavBtns {\n  width: 50%;\n  position: relative;\n  margin: 0 auto;\n}\n.questionNavBtn {\n  position: relative;\n  margin-right: 5px;\n  border: 2px solid #333;\n}\n.questionNavBtn:hover {\n  color: #808080;\n  border: 2px solid #808080;\n}\n.questionNavBtn.left {\n  left: 100px;\n}\n.questionNavBtn.right {\n  float: right;\n}\n", ""]);
 
 // exports
 

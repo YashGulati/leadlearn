@@ -13,16 +13,20 @@ export default class Tests extends Component {
       { name: 'All', symbol: 'all'} ];
     this.state = {weapon: ''};
     this.startTest = this.startTest.bind(this);
+    this.onCancel = this.onCancel.bind(this);
   }
   startTest(weapon) {
     this.setState({weapon});
+  }
+  onCancel() {
+    this.setState({weapon: ''})
   }
   render() {
     let markup;
     if (this.state.weapon === '')
         markup = <Init onSubmit={this.startTest} weapons={this.weapons} />;
     else if (this.weapons.map(function(e) { return e.symbol; }).indexOf(this.state.weapon) > -1)
-        markup = <Test weapon={this.state.weapon} />;
+        markup = <Test weapon={this.state.weapon} onCancel={this.onCancel} />;
     else
       markup = <h1>Error no weapon</h1>;
     return (
