@@ -13097,10 +13097,10 @@ var AddQuestion = function (_Component) {
     var _this = _possibleConstructorReturn(this, (AddQuestion.__proto__ || Object.getPrototypeOf(AddQuestion)).call(this, props));
 
     _this.state = {
-      query: '',
-      options: '',
-      correctOp: '',
-      tags: ''
+      query: "",
+      options: "",
+      correctOp: "",
+      tags: ""
     };
     _this.handleInputChange = _this.handleInputChange.bind(_this);
     _this.onSubmit = _this.onSubmit.bind(_this);
@@ -13121,15 +13121,19 @@ var AddQuestion = function (_Component) {
           correctOp = _state.correctOp,
           tags = _state.tags;
 
+      var data = JSON.stringify({
+        query: query, options: options, correctOp: correctOp, tags: tags
+      });
+      data = encodeURIComponent(data);
+      console.log('data');
+      console.log(data);
       return fetch('/addQuestion', {
         method: 'POST',
         headers: _defineProperty({
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }, 'Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8'),
-        body: JSON.stringify({
-          query: query, options: options, correctOp: correctOp, tags: tags
-        })
+        body: data
       });
     }
   }, {

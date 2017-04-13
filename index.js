@@ -58,6 +58,7 @@ app.post('/register', (req,res)=>{
 })
 
 app.post('/addQuestion', (req,res)=>{
+  console.log(req.body);
   var data = Object.keys(req.body)[0];
   console.log(data);
   var obj = JSON.parse(data);

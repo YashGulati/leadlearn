@@ -4,10 +4,10 @@ export default class AddQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
-      options: '',
-      correctOp: '',
-      tags: ''
+      query: "",
+      options: "",
+      correctOp: "",
+      tags: ""
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -17,6 +17,12 @@ export default class AddQuestion extends Component {
   }
   onSubmit() {
     const { query, options, correctOp, tags } = this.state;
+    let data = JSON.stringify({
+      query: query, options: options, correctOp: correctOp, tags: tags
+    })
+    data = encodeURIComponent(data);
+    console.log('data');
+    console.log(data);
     return fetch('/addQuestion', {
       method: 'POST',
       headers: {
@@ -24,9 +30,7 @@ export default class AddQuestion extends Component {
         'Content-Type': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
       },
-      body: JSON.stringify({
-        query: query, options: options, correctOp: correctOp, tags: tags
-      })
+      body: data
     })
   }
   render() {
