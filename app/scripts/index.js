@@ -13125,8 +13125,6 @@ var AddQuestion = function (_Component) {
         query: query, options: options, correctOp: correctOp, tags: tags
       });
       data = encodeURIComponent(data);
-      console.log('data');
-      console.log(data);
       return fetch('/addQuestion', {
         method: 'POST',
         headers: _defineProperty({
