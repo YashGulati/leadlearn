@@ -20,15 +20,15 @@ export default class Test extends Component {
       }
     }
     this.state.answers = [];
-    this.fetchQuestion = this.fetchQuestion.bind(this);
+    this.fetchQuestions = this.fetchQuestions.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.onOptionSelect = this.onOptionSelect.bind(this);
     this.submit = this.submit.bind(this);
-    this.fetchQuestion();
+    this.fetchQuestions();
   }
-  fetchQuestion() {
+  fetchQuestions() {
     var myInit = { method: "GET" };
-    fetch("/getQuestion", myInit).then((response) => {
+    fetch("/getQuestion?weapon=" + this.props.weapon, myInit).then((response) => {
       return response.json();
     }).then((questions) => {
       console.log(questions);
@@ -80,7 +80,7 @@ export default class Test extends Component {
     this.setState({answers})
   }
   render() {
-    if (this.state.showResult) return <Result {...this.state.result} />
+    if (this.state.showResult) return <Result {...this.state.result} onReTestClick={this.props.onCancel} />
     return (
       <div>
         <h1>Test for {this.props.weapon}</h1>

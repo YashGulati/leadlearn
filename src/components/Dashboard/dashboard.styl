@@ -17,10 +17,12 @@
 }
 
 .rightToLeft-appear {
-  transform: translate3d(80%, 0, 0);
+  // transform: translate3d(80%, 0, 0);
+  opacity: 0.01;
 }
 
 .rightToLeft-appear.rightToLeft-appear-active {
-  transform: translate3d(0%, 0, 0);
-  transition: all .1s linear;
+  // transform: translate3d(0%, 0, 0);
+  opacity: 1;
+  transition: opacity 1s linear;
 }

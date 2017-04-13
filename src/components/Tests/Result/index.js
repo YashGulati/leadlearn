@@ -22,6 +22,7 @@ export default class Result extends Component {
           <p>Not Attended: <span>{unAttended}</span></p>
           <p>Percentage: <span style={{color: percentageColor}}>{percentage}</span></p>
           <h2 className={"remarks " + remarksClass}>{remarks}</h2>
+          <button onClick={this.props.onReTestClick}>Re-Test</button>
       </div>
     );
   }
