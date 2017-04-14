@@ -40,7 +40,7 @@ export default class Test extends Component {
   nextQuestion(e) { const action = e.target.value;
     console.log(action);
     console.log(this.state.answers);
-    if (this.state.questions.length === 0) this.setState({question: 'No questions in DB', options: 'No question in DB'});
+    if (this.state.questions.length === 0) this.setState({question: 'No questions in DB', options: ['No question in DB']});
     if ((this.state.qno >= this.state.questions.length -1 && action==='next' ) || ( this.state.qno === 0 && action === 'back' )) {
       console.log('Questions Ended'); return;
     }
@@ -82,10 +82,10 @@ export default class Test extends Component {
   }
   render() {
     const {qno, question, options, answers} = this.state;
-    let disabledPrev = 'enabled';
-    if (qno === 0) disabledPrev = 'disabled';
-    let disabledNext = 'enabled';
-    if (qno === this.state.questions.length - 1) disabledNext = 'disabled';
+    let prevBtn = { class: 'enabled', disabled: false};
+    if (qno <= 0) { prevBtn.class = 'disabled';  prevBtn.disabled = true;  }
+    let nextBtn = { class: 'enabled', disabled: false};
+    if (qno === this.state.questions.length - 1) { nextBtn.class = 'disabled'; nextBtn.disabled = true; }
     if (this.state.showResult) return <Result {...this.state.result} onReTestClick={this.props.onCancel} />
     return (
       <div>
@@ -97,8 +97,8 @@ export default class Test extends Component {
           options={options}
           selected={answers[qno]} />
         <div className='questionNavBtns'>
-          <button className={"questionNavBtn left " + disabledNext} value='next' onClick={this.nextQuestion}>Next</button>
-          <button className={"questionNavBtn left " + disabledPrev} value='back' onClick={this.nextQuestion}>Previous</button>
+          <button className={"questionNavBtn left " + nextBtn.class} disabled={nextBtn.disabled} value='next' onClick={this.nextQuestion}>Next</button>
+          <button className={"questionNavBtn left " + prevBtn.class} disabled={prevBtn.disabled} value='back' onClick={this.nextQuestion}>Previous</button>
           <button className="questionNavBtn right" value='cancel' onClick={this.props.onCancel}>Cancel Test</button>
           <button className="questionNavBtn right" value='submit' onClick={this.submit}>Submit</button>
         </div>

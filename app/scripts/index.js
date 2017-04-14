@@ -7974,6 +7974,16 @@ var Header = function (_Component) {
   _createClass(Header, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var headerLinksArr = ['home', 'courses', 'tests', 'chat', 'explore'];
+      var headerLinks = headerLinksArr.map(function (headerLinkName, idx) {
+        return _react2.default.createElement(
+          _HeaderLink2.default,
+          { history: _this2.props.history, key: idx },
+          headerLinkName
+        );
+      });
       return _react2.default.createElement(
         'header',
         null,
@@ -7985,31 +7995,9 @@ var Header = function (_Component) {
         _react2.default.createElement(
           'ul',
           null,
-          _react2.default.createElement(
-            _HeaderLink2.default,
-            { history: this.props.history },
-            'home'
-          ),
-          _react2.default.createElement(
-            _HeaderLink2.default,
-            { history: this.props.history },
-            'courses'
-          ),
-          _react2.default.createElement(
-            _HeaderLink2.default,
-            { history: this.props.history },
-            'tests'
-          ),
-          _react2.default.createElement(
-            _HeaderLink2.default,
-            { history: this.props.history },
-            'chat'
-          ),
-          _react2.default.createElement(
-            _HeaderLink2.default,
-            { history: this.props.history },
-            'explore'
-          )
+          ' ',
+          headerLinks,
+          ' '
         )
       );
     }
@@ -13865,7 +13853,7 @@ var Test = function (_Component) {
       var action = e.target.value;
       console.log(action);
       console.log(this.state.answers);
-      if (this.state.questions.length === 0) this.setState({ question: 'No questions in DB', options: 'No question in DB' });
+      if (this.state.questions.length === 0) this.setState({ question: 'No questions in DB', options: ['No question in DB'] });
       if (this.state.qno >= this.state.questions.length - 1 && action === 'next' || this.state.qno === 0 && action === 'back') {
         console.log('Questions Ended');return;
       }
@@ -13919,10 +13907,14 @@ var Test = function (_Component) {
           options = _state.options,
           answers = _state.answers;
 
-      var disabledPrev = 'enabled';
-      if (qno === 0) disabledPrev = 'disabled';
-      var disabledNext = 'enabled';
-      if (qno === this.state.questions.length - 1) disabledNext = 'disabled';
+      var prevBtn = { class: 'enabled', disabled: false };
+      if (qno <= 0) {
+        prevBtn.class = 'disabled';prevBtn.disabled = true;
+      }
+      var nextBtn = { class: 'enabled', disabled: false };
+      if (qno === this.state.questions.length - 1) {
+        nextBtn.class = 'disabled';nextBtn.disabled = true;
+      }
       if (this.state.showResult) return _react2.default.createElement(_Result2.default, _extends({}, this.state.result, { onReTestClick: this.props.onCancel }));
       return _react2.default.createElement(
         'div',
@@ -13944,12 +13936,12 @@ var Test = function (_Component) {
           { className: 'questionNavBtns' },
           _react2.default.createElement(
             'button',
-            { className: "questionNavBtn left " + disabledNext, value: 'next', onClick: this.nextQuestion },
+            { className: "questionNavBtn left " + nextBtn.class, disabled: nextBtn.disabled, value: 'next', onClick: this.nextQuestion },
             'Next'
           ),
           _react2.default.createElement(
             'button',
-            { className: "questionNavBtn left " + disabledPrev, value: 'back', onClick: this.nextQuestion },
+            { className: "questionNavBtn left " + prevBtn.class, disabled: prevBtn.disabled, value: 'back', onClick: this.nextQuestion },
             'Previous'
           ),
           _react2.default.createElement(
