@@ -7961,7 +7961,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var styles = __webpack_require__(266);
-var ReactCSSTransitionGroup = __webpack_require__(73);
 
 var Header = function (_Component) {
   _inherits(Header, _Component);
@@ -13255,7 +13254,7 @@ var Home = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Dashboard2.default, null)
+        _react2.default.createElement(_Dashboard2.default, { history: this.props.history })
       );
     }
   }]);
@@ -13401,8 +13400,6 @@ var _dashboard2 = _interopRequireDefault(_dashboard);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -13419,35 +13416,18 @@ var Dashboard = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
 
-    _this.add = _this.add.bind(_this);
-    _this.names = [1, 2, 3, 4];
-    _this.state = { names: _this.names };
-    _this.numb = 4;
+    _this.gotoTests = _this.gotoTests.bind(_this);
     return _this;
   }
 
   _createClass(Dashboard, [{
-    key: 'add',
-    value: function add() {
-      // this.names.push(++this.numb)
-      // console.log(this.names);
-      this.setState({ names: [].concat(_toConsumableArray(this.state.names), [++this.numb]) });
-    }
-  }, {
-    key: 'renderNames',
-    value: function renderNames() {
-      return this.state.names.map(function (name, index) {
-        return _react2.default.createElement(
-          'p',
-          { key: index, style: { background: '#445566', padding: 10, fontSize: '1.5em', width: '50%' } },
-          name
-        );
-      });
+    key: 'gotoTests',
+    value: function gotoTests() {
+      this.props.history.push('/tests');
     }
   }, {
     key: 'render',
     value: function render() {
-
       var transitionOptions = {
         transitionName: "rightToLeft",
         transitionAppear: true,
@@ -13455,6 +13435,7 @@ var Dashboard = function (_Component) {
         transitionEnterTimeout: 500,
         transitionLeaveTimeout: 500
       };
+
       return _react2.default.createElement(
         'div',
         null,
@@ -13464,12 +13445,21 @@ var Dashboard = function (_Component) {
           ' '
         ),
         _react2.default.createElement(
-          ReactCSSTransitionGroup,
-          transitionOptions,
+          'div',
+          { className: 'dashboard' },
           _react2.default.createElement(
-            'h1',
-            { onClick: this.add },
-            'Dashboard'
+            ReactCSSTransitionGroup,
+            transitionOptions,
+            _react2.default.createElement(
+              'h1',
+              { className: 'dashHeading' },
+              'Tests are ready to test you.'
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: this.gotoTests },
+              'Take a Test'
+            )
           )
         )
       );
@@ -13480,72 +13470,6 @@ var Dashboard = function (_Component) {
 }(_react.Component);
 
 exports.default = Dashboard;
-
-var TodoList = function (_React$Component) {
-  _inherits(TodoList, _React$Component);
-
-  function TodoList(props) {
-    _classCallCheck(this, TodoList);
-
-    var _this2 = _possibleConstructorReturn(this, (TodoList.__proto__ || Object.getPrototypeOf(TodoList)).call(this, props));
-
-    _this2.state = { items: ['hello', 'world', 'click', 'me'] };
-    _this2.handleAdd = _this2.handleAdd.bind(_this2);
-    return _this2;
-  }
-
-  _createClass(TodoList, [{
-    key: 'handleAdd',
-    value: function handleAdd() {
-      var newItems = this.state.items.concat([prompt('Enter some text')]);
-      this.setState({ items: newItems });
-    }
-  }, {
-    key: 'handleRemove',
-    value: function handleRemove(i) {
-      var newItems = this.state.items.slice();
-      newItems.splice(i, 1);
-      this.setState({ items: newItems });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      var items = this.state.items.map(function (item, i) {
-        return _react2.default.createElement(
-          'div',
-          { key: item, onClick: function onClick() {
-              return _this3.handleRemove(i);
-            } },
-          item
-        );
-      });
-
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'button',
-          { onClick: this.handleAdd },
-          'Add Item'
-        ),
-        _react2.default.createElement(
-          ReactCSSTransitionGroup,
-          {
-            transitionName: 'example',
-            transitionAppear: true,
-            transitionAppearTimeout: 500,
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 300 },
-          items
-        )
-      );
-    }
-  }]);
-
-  return TodoList;
-}(_react2.default.Component);
 
 /***/ }),
 /* 116 */
@@ -13941,6 +13865,7 @@ var Test = function (_Component) {
       var action = e.target.value;
       console.log(action);
       console.log(this.state.answers);
+      if (this.state.questions.length === 0) this.setState({ question: 'No questions in DB', options: 'No question in DB' });
       if (this.state.qno >= this.state.questions.length - 1 && action === 'next' || this.state.qno === 0 && action === 'back') {
         console.log('Questions Ended');return;
       }
@@ -13988,6 +13913,16 @@ var Test = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _state = this.state,
+          qno = _state.qno,
+          question = _state.question,
+          options = _state.options,
+          answers = _state.answers;
+
+      var disabledPrev = 'enabled';
+      if (qno === 0) disabledPrev = 'disabled';
+      var disabledNext = 'enabled';
+      if (qno === this.state.questions.length - 1) disabledNext = 'disabled';
       if (this.state.showResult) return _react2.default.createElement(_Result2.default, _extends({}, this.state.result, { onReTestClick: this.props.onCancel }));
       return _react2.default.createElement(
         'div',
@@ -14000,21 +13935,21 @@ var Test = function (_Component) {
         ),
         _react2.default.createElement(_Question2.default, {
           onOptionSelect: this.onOptionSelect,
-          qno: this.state.qno,
-          question: this.state.question,
-          options: this.state.options,
-          selected: this.state.answers[this.state.qno] }),
+          qno: qno,
+          question: question,
+          options: options,
+          selected: answers[qno] }),
         _react2.default.createElement(
           'div',
           { className: 'questionNavBtns' },
           _react2.default.createElement(
             'button',
-            { className: 'questionNavBtn left', value: 'next', onClick: this.nextQuestion },
+            { className: "questionNavBtn left " + disabledNext, value: 'next', onClick: this.nextQuestion },
             'Next'
           ),
           _react2.default.createElement(
             'button',
-            { className: 'questionNavBtn left', value: 'back', onClick: this.nextQuestion },
+            { className: "questionNavBtn left " + disabledPrev, value: 'back', onClick: this.nextQuestion },
             'Previous'
           ),
           _react2.default.createElement(
@@ -16208,7 +16143,7 @@ exports = module.exports = __webpack_require__(16)(undefined);
 
 
 // module
-exports.push([module.i, ".rightToLeft-enter {\n  opacity: 0.01;\n}\n.rightToLeft-enter.rightToLeft-enter-active {\n  opacity: 1;\n  transition: opacity 5s ease-in;\n}\n.rightToLeft-leave {\n  opacity: 1;\n}\n.rightToLeft-leave.rightToLeft-leave-active {\n  opacity: 0.01;\n  transition: opacity 3s ease-in;\n}\n.rightToLeft-appear {\n  opacity: 0.01;\n}\n.rightToLeft-appear.rightToLeft-appear-active {\n  opacity: 1;\n  transition: opacity 1s linear;\n}\n", ""]);
+exports.push([module.i, ".dashboard {\n  text-align: center;\n  width: 50%;\n  margin: 0 auto;\n}\n.dashboard h1 {\n  margin: 80px 5px 20px 5px;\n}\n.dashboard button {\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  background: rgba(50,150,50,0.6);\n  border: 3px solid #329650;\n  width: 30%;\n}\n.dashboard button:hover {\n  border: 3px solid #fff;\n}\n.rightToLeft-enter {\n  opacity: 0.01;\n}\n.rightToLeft-enter.rightToLeft-enter-active {\n  opacity: 1;\n  transition: opacity 5s ease-in;\n}\n.rightToLeft-leave {\n  opacity: 1;\n}\n.rightToLeft-leave.rightToLeft-leave-active {\n  opacity: 0.01;\n  transition: opacity 3s ease-in;\n}\n.rightToLeft-appear {\n  opacity: 0.01;\n}\n.rightToLeft-appear.rightToLeft-appear-active {\n  opacity: 1;\n  transition: opacity 1s linear;\n}\n", ""]);
 
 // exports
 
@@ -16278,7 +16213,7 @@ exports = module.exports = __webpack_require__(16)(undefined);
 
 
 // module
-exports.push([module.i, ".questionNavBtns {\n  width: 50%;\n  position: relative;\n  margin: 0 auto;\n}\n.questionNavBtn {\n  position: relative;\n  margin-right: 5px;\n  border: 2px solid #333;\n}\n.questionNavBtn:hover {\n  color: #808080;\n  border: 2px solid #808080;\n}\n.questionNavBtn.left {\n  left: 100px;\n}\n.questionNavBtn.right {\n  float: right;\n}\n", ""]);
+exports.push([module.i, ".questionNavBtns {\n  width: 50%;\n  position: relative;\n  margin: 0 auto;\n}\n.questionNavBtn {\n  position: relative;\n  margin-right: 5px;\n  border: 2px solid #333;\n}\n.questionNavBtn.enabled:hover {\n  color: #808080;\n  border: 2px solid #808080;\n}\n.questionNavBtn.left {\n  left: 100px;\n}\n.questionNavBtn.right {\n  float: right;\n}\n.questionNavBtn.disabled {\n  opacity: 0.6;\n}\n", ""]);
 
 // exports
 

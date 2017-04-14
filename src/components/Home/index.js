@@ -6,9 +6,7 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-
-          <Dashboard />
-        
+          <Dashboard history={this.props.history} />
       </div>
     )
   }

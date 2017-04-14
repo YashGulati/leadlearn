@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import HeaderLink from './HeaderLink'
 var styles = require('./header.styl');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 export default class Header extends Component {
   constructor(props) {
     super(props);
