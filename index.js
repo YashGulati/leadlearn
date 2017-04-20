@@ -12,7 +12,7 @@ var mongoDB = 'mongodb://127.0.0.1:27017/leadlearn';
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var user = require('./dbs/userSchema');
-var nev = require('email-verification')(mongoose);
+// var nev = require('email-verification')(mongoose);
 mongoose.connect(mongoDB);
 // ----------------------
 // email verification configuration ---------------
