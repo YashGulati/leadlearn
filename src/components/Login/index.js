@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 
 export default class Home extends Component {
   state = {username: '', password: '', error: ''}
+  constructor(props) {
+    super(props);
+  }
+  componentWillMount() {
+    const token = localStorage.getItem('id_token');
+    console.log(token);
+    if (token) this.props.history.push('/');
+  }
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -30,6 +38,8 @@ export default class Home extends Component {
         return;
       }
       localStorage.setItem('id_token', response.id_token);
+      console.log(this.props);
+      this.props.history.push(this.props.location.search.slice(1))
     });
 
   }

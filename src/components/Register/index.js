@@ -7,6 +7,11 @@ export default class Home extends Component {
       [e.target.name]: e.target.value
     });
   }
+  componentWillMount() {
+    const token = localStorage.getItem('id_token');
+    console.log(token);
+    if (token) this.props.history.push('/');
+  }
   onSubmit = (e) => { const { username, password, email } = this.state;
     e.preventDefault();
     if (username === '' || !username) return this.setState({error: 'username empty!'});

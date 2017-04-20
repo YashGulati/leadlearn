@@ -21,7 +21,7 @@ export default class Header extends Component {
       <header>
         <Link to="/"><img src="/l1.png" alt="leadlearn_logo" height="80px" /></Link>
         <ul> {headerLinks} </ul>
-        <HeaderButtons />
+        <HeaderButtons history={this.props.history} location={this.props.location} />
         {/* <div className="buttons">
           <% if(loggedIn === 0){ %>
 

@@ -8007,7 +8007,7 @@ var Header = function (_Component) {
           headerLinks,
           ' '
         ),
-        _react2.default.createElement(_HeaderButtons2.default, null)
+        _react2.default.createElement(_HeaderButtons2.default, { history: this.props.history, location: this.props.location })
       );
     }
   }]);
@@ -13291,23 +13291,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Home = function (_Component) {
   _inherits(Home, _Component);
 
-  function Home() {
-    var _ref,
-        _this2 = this;
-
-    var _temp, _this, _ret;
+  function Home(props) {
+    var _this2 = this;
 
     _classCallCheck(this, Home);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Home.__proto__ || Object.getPrototypeOf(Home)).call.apply(_ref, [this].concat(args))), _this), _this.state = { username: '', password: '', error: '' }, _this.onChange = function (e) {
+    _this.state = { username: '', password: '', error: '' };
+
+    _this.onChange = function (e) {
       _newArrowCheck(this, _this2);
 
       _this.setState(_defineProperty({}, e.target.name, e.target.value));
-    }.bind(this), _this.onSubmit = function (e) {
+    }.bind(this);
+
+    _this.onSubmit = function (e) {
       _newArrowCheck(this, _this2);
 
       var _this$state = _this.state,
@@ -13338,11 +13337,22 @@ var Home = function (_Component) {
           return;
         }
         localStorage.setItem('id_token', response.id_token);
+        console.log(_this.props);
+        _this.props.history.push(_this.props.location.search.slice(1));
       }.bind(this));
-    }.bind(this), _temp), _possibleConstructorReturn(_this, _ret);
+    }.bind(this);
+
+    return _this;
   }
 
   _createClass(Home, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var token = localStorage.getItem('id_token');
+      console.log(token);
+      if (token) this.props.history.push('/');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -14257,12 +14267,25 @@ var App = function (_Component) {
   _inherits(App, _Component);
 
   function App() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = { isMounted: false }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(App, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.setState({ isMounted: true });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -14273,7 +14296,7 @@ var App = function (_Component) {
           null,
           _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _header2.default, getAuth: _rest2.default.getAuth }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Home2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', component: _Login2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', component: _Login2.default, isMounted: this.state.isMounted }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/register', component: _Register2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/tests', component: _Tests2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/chat', component: _Chat2.default }),
@@ -31370,6 +31393,8 @@ var _reactRouterDom = __webpack_require__(67);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _newArrowCheck(innerThis, boundThis) { if (innerThis !== boundThis) { throw new TypeError("Cannot instantiate an arrow function"); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -31382,9 +31407,23 @@ var Header = function (_Component) {
   _inherits(Header, _Component);
 
   function Header(props) {
+    var _this2 = this;
+
     _classCallCheck(this, Header);
 
-    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+
+    _this.onClick = function (e) {
+      _newArrowCheck(this, _this2);
+
+      e.preventDefault();
+      var token = localStorage.getItem('id_token');
+      console.log(token);
+      if (token) return;
+      _this.props.history.push(e.target.value + '?' + _this.props.location.pathname);
+    }.bind(this);
+
+    return _this;
   }
 
   _createClass(Header, [{
@@ -31394,13 +31433,13 @@ var Header = function (_Component) {
         'div',
         { className: 'headerButtons' },
         _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/login', name: 'button', className: 'button', href: '/login' },
+          'button',
+          { onClick: this.onClick, name: 'button', className: 'button', href: '#', value: '/login' },
           'Log in'
         ),
         _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/register', name: 'button', className: 'green', href: '/register' },
+          'button',
+          { onClick: this.onClick, name: 'button', className: 'green', href: '#', value: '/register' },
           'REGISTER'
         )
       );
@@ -31488,7 +31527,7 @@ exports = module.exports = __webpack_require__(16)(undefined);
 
 
 // module
-exports.push([module.i, ".headerButtons {\n  position: absolute;\n  right: 5%;\n  top: 50%;\n  transform: translate(0%, -50%);\n}\n.headerButtons a {\n  color: #fff;\n  text-decoration: none;\n  margin: 5px;\n  padding: 10px;\n}\n", ""]);
+exports.push([module.i, ".headerButtons {\n  position: absolute;\n  right: 5%;\n  top: 50%;\n  transform: translate(0%, -50%);\n}\n.headerButtons button {\n  font-weight: 400;\n}\n.headerButtons button:nth-child(1) {\n  background: none;\n}\n", ""]);
 
 // exports
 
@@ -31605,6 +31644,13 @@ var Home = function (_Component) {
   }
 
   _createClass(Home, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var token = localStorage.getItem('id_token');
+      console.log(token);
+      if (token) this.props.history.push('/');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(

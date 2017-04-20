@@ -1,4 +1,1 @@
-  something similar to
-  https://www.flipkart.com/account/login?ret=/
-  when logging in return to the page from where you were sent to login
-Add all the models fro dbs to dbs/models
+-1) Add all the models fro dbs to dbs/models

@@ -34,15 +34,11 @@ app.post('/users', function(req, res) {
   });
 
 app.post('/tokens', function(req, res) {
-  console.log('req.body');
-  console.log(req.body);
   const { username, email, password } = JSON.parse(Object.keys(req.body)[0]);
-  console.log(Object.keys(req.body)[0]);
-  console.log(username, email, password);
   if (!username || !password) {
     return res.status(400).send({error: "You must send the username and the password"});
   }
-
+  console.log(req.params);
   getUserData.matchUserPass(username, password)
   .then((user) => {
     if(!user) return res.status(401).send({error: "The username or password don't match"});
