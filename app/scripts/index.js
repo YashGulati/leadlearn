@@ -31538,6 +31538,10 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _newArrowCheck(innerThis, boundThis) { if (innerThis !== boundThis) { throw new TypeError("Cannot instantiate an arrow function"); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -31548,7 +31552,8 @@ var Home = function (_Component) {
   _inherits(Home, _Component);
 
   function Home() {
-    var _ref;
+    var _ref,
+        _this2 = this;
 
     var _temp, _this, _ret;
 
@@ -31558,7 +31563,45 @@ var Home = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Home.__proto__ || Object.getPrototypeOf(Home)).call.apply(_ref, [this].concat(args))), _this), _this.state = { error: '' }, _temp), _possibleConstructorReturn(_this, _ret);
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Home.__proto__ || Object.getPrototypeOf(Home)).call.apply(_ref, [this].concat(args))), _this), _this.state = { username: '', password: '', email: '', error: '' }, _this.onChange = function (e) {
+      _newArrowCheck(this, _this2);
+
+      _this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }.bind(this), _this.onSubmit = function (e) {
+      _newArrowCheck(this, _this2);
+
+      var _this$state = _this.state,
+          username = _this$state.username,
+          password = _this$state.password,
+          email = _this$state.email;
+
+      e.preventDefault();
+      if (username === '' || !username) return _this.setState({ error: 'username empty!' });else if (email === '' || !email) return _this.setState({ error: 'email empty!' });else if (password === '' || !password) return _this.setState({ error: 'password empty!' });else _this.setState({ error: '' });
+      console.log(_this.state);
+
+      var myInit = {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        method: "POST",
+        body: JSON.stringify({ username: username, password: password, email: email })
+      };
+      fetch("/users", myInit).then(function (response) {
+        _newArrowCheck(this, _this2);
+
+        return response.json();
+      }.bind(this)).then(function (response) {
+        _newArrowCheck(this, _this2);
+
+        if (response.error) {
+          _this.setState({ error: response.error });
+          return;
+        }
+        localStorage.setItem('id_token', response.id_token);
+        _this.props.history.push('/');
+      }.bind(this));
+    }.bind(this), _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Home, [{

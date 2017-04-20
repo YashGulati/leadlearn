@@ -13,17 +13,18 @@ function createToken(user) {
 }
 
 app.post('/users', function(req, res) {
-  const { username, email, password } = req.body;
+  const { username, email, password } = JSON.parse(Object.keys(req.body)[0]);
+  console.log(username, email, password);
   if (!username || !email || !password) {
-    if (!username) return res.status(400).send("You must send the username");
-    if (!email) return res.status(400).send("You must send the email");
-    if (!password ) return res.status(400).send("You must send the password ");
+    if (!username) return res.status(400).send({error: "You must send the username"});
+    if (!email) return res.status(400).send({error: "You must send the email"});
+    if (!password ) return res.status(400).send({error: "You must send the password "});
   }
 
   getUserData.allUsers()
   .then((users) => {
-    if (_.find(users, {email})) return res.status(400).send("A user with that email already exists");
-    if (_.find(users, {username})) return res.status(400).send("A user with that username already exists");
+    if (_.find(users, {email})) return res.status(400).send({error: "A user with that email already exists"});
+    if (_.find(users, {username})) return res.status(400).send({error: "A user with that username already exists"});
     const user = { username, email, password };
     addUser(user);
     res.status(201).send({
@@ -39,7 +40,7 @@ app.post('/tokens', function(req, res) {
   console.log(Object.keys(req.body)[0]);
   console.log(username, email, password);
   if (!username || !password) {
-    return res.status(400).send("You must send the username and the password");
+    return res.status(400).send({error: "You must send the username and the password"});
   }
 
   getUserData.matchUserPass(username, password)
@@ -49,9 +50,6 @@ app.post('/tokens', function(req, res) {
       id_token: createToken(user)
     });
   })
-  // res.status(201).send({
-  //   error: 'unhandled error in token post handler'
-  // });
 });
 
 app.get('/allUsers', (req, res) => {
