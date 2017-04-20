@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import HeaderLink from './HeaderLink'
+import HeaderLink from './HeaderLink/index.js';
+import HeaderButtons from './HeaderButtons';
 var styles = require('./header.styl');
+
 export default class Header extends Component {
   constructor(props) {
     super(props);
@@ -19,10 +21,10 @@ export default class Header extends Component {
       <header>
         <Link to="/"><img src="/l1.png" alt="leadlearn_logo" height="80px" /></Link>
         <ul> {headerLinks} </ul>
+        <HeaderButtons />
         {/* <div className="buttons">
           <% if(loggedIn === 0){ %>
-            <a name="button" class="button" href="/login">Log in</a>
-            <a name="button" class="green" href="/register">REGISTER</a>
+
           <% } else { %>
             <a name="button" class="button" href="#" onclick="profile()">Profile</a>
             <a name="button" class="button" href="#" onclick="logout()">Log out</a>

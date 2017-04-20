@@ -27,7 +27,9 @@ export default class Test extends Component {
     this.fetchQuestions();
   }
   fetchQuestions() {
-    var myInit = { method: "GET" };
+    var myInit = {
+      method: "GET",
+    }
     fetch("/getQuestion?weapon=" + this.props.weapon, myInit).then((response) => {
       return response.json();
     }).then((questions) => {

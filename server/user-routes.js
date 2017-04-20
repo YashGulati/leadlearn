@@ -33,19 +33,25 @@ app.post('/users', function(req, res) {
   });
 
 app.post('/tokens', function(req, res) {
-  const { username, email, password } = req.body;
+  console.log('req.body');
+  console.log(req.body);
+  const { username, email, password } = JSON.parse(Object.keys(req.body)[0]);
+  console.log(Object.keys(req.body)[0]);
+  console.log(username, email, password);
   if (!username || !password) {
     return res.status(400).send("You must send the username and the password");
   }
 
   getUserData.matchUserPass(username, password)
   .then((user) => {
-    if(!user) return res.status(401).send("The username or password don't match");
+    if(!user) return res.status(401).send({error: "The username or password don't match"});
     res.status(201).send({
       id_token: createToken(user)
     });
   })
-
+  // res.status(201).send({
+  //   error: 'unhandled error in token post handler'
+  // });
 });
 
 app.get('/allUsers', (req, res) => {

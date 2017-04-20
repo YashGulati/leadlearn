@@ -8,8 +8,9 @@ var jwtCheck = jwt({
   secret: config.secret
 });
 
-app.use('/api/protected', jwtCheck);
+// app.use('/addQuestion', jwtCheck);
+app.use('/p/api', jwtCheck);
 
-app.get('/api/protected/random-quote', function(req, res) {
-  res.status(200).render('index');
-});
+// app.get('/chat', function(req, res) {
+//   res.status(200).render('index');
+// });

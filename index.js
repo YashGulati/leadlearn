@@ -58,6 +58,9 @@ app.use(stylus({
 }))
 app.use(express.static('./app'))
 
+app.use(require('./server/protected-routes'));
+app.use(require('./server/user-routes'));
+
 app.get('/getQuestion', (req,res)=>{
   require('./dbs/getQuestion').renderQuestion(req, res);
 })
@@ -89,13 +92,6 @@ app.post('/addQuestion', (req,res)=>{
   res.redirect('/addQuestion');
 })
 
-
-// app.post('/getUsername', (req,res)=>{
-//   require('./dbs/getUsername').getUsername(req, res);
-// })
-
-app.use(require('./server/protected-routes'));
-app.use(require('./server/user-routes'));
 app.get('/*', (req, res)=>{
   res.render('index')
 })
