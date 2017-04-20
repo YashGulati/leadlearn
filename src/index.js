@@ -6,6 +6,7 @@ import Header from './components/header';
 import rest from './lib/rest';
 
 import Home from './components/Home';
+import Login from './components/Login';
 import Tests from './components/Tests';
 import AddQuestion from './components/AddQuestion';
 
@@ -16,6 +17,7 @@ class App extends Component {
         <div>
           <Route path='/' component={Header} getAuth={rest.getAuth} />
           <Route exact path='/' component={Home}/>
+          <Route exact path='/login' component={Login}/>
           <Route exact path='/tests' component={Tests} />
           <Route exact path='/addQuestion' component={AddQuestion} />
         </div>

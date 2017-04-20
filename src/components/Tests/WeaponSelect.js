@@ -11,8 +11,8 @@ export default class Init extends Component {
       return <option key={weapon.symbol} value={weapon.symbol}>{weapon.name}</option>;
     });
     return (
-        <select name="course" onChange={this.onChange.bind(this)}>
-          <option disabled selected defaultValue value> -- Select your weapon -- </option>
+        <select name="course" onChange={this.onChange.bind(this)} defaultValue='default'>
+          <option disabled value='default'> -- Select your weapon -- </option>
           {markup}
         </select>
     )

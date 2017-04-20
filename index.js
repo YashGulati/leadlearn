@@ -4,19 +4,40 @@ var stylus = require('express-stylus')
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
-var global = require('./global')
 var morgan      = require('morgan');
 var jwt = require('jsonwebtoken')
-// database-------------
+// database and email verification-------------
 var mongoose = require('mongoose')
 var mongoDB = 'mongodb://127.0.0.1:27017/leadlearn';
-mongoose.connect(mongoDB);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-var user = require('./dbs/userSchema')
-//----------------------
-
-
+var user = require('./dbs/userSchema');
+var nev = require('email-verification')(mongoose);
+mongoose.connect(mongoDB);
+// ----------------------
+// email verification configuration ---------------
+// nev.configure({
+//     verificationURL: 'http://myawesomewebsite.com/email-verification/${URL}',
+//     persistentUserModel: user,
+//     tempUserCollection: 'myawesomewebsite_tempusers',
+//
+//     transportOptions: {
+//         service: 'Gmail',
+//         auth: {
+//             user: 'a',
+//             pass: 'a'
+//         }
+//     },
+//     verifyMailOptions: {
+//         from: 'Do Not Reply <myawesomeemail_do_not_reply@gmail.com>',
+//         subject: 'Please confirm account',
+//         html: 'Click the following link to confirm your account:</p><p>${URL}</p>',
+//         text: 'Please confirm your account by clicking the following link: ${URL}'
+//     }
+// }, function(error, options){
+// });
+// nev.generateTempUserModel(user);
+//----------------------------------------------
 
 // ejs templating
 app.set('view engine', 'ejs')
@@ -46,12 +67,6 @@ app.get('/dev', (req,res)=>{
   res.render('dev', { global: JSON.stringify(global) })
 })
 
-// app.get('/*', (req, res)=>{ var loggedIn = 0
-//   page = req.url.substring(1)
-//   if(req.signedCookies.session) loggedIn = 1
-//   res.render(page, {loggedIn, err: 0})
-// })
-
 app.post('/register', (req,res)=>{
   console.log(require('./dbs/addUser')(req.body));
   res.redirect('/registrationSuccess');
@@ -74,20 +89,13 @@ app.post('/addQuestion', (req,res)=>{
   res.redirect('/addQuestion');
 })
 
-app.post('/login', (req,res)=>{
-  require('./login').login(req, res);
-})
 
-app.post('/logout', (req,res)=>{
-  require('./logout').logout(req, res);
-})
+// app.post('/getUsername', (req,res)=>{
+//   require('./dbs/getUsername').getUsername(req, res);
+// })
 
-
-app.post('/getUsername', (req,res)=>{
-  require('./dbs/getUsername').getUsername(req, res);
-  // res.send('yo')
-})
-
+app.use(require('./server/protected-routes'));
+app.use(require('./server/user-routes'));
 app.get('/*', (req, res)=>{
   res.render('index')
 })

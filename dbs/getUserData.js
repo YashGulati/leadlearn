@@ -1,18 +1,6 @@
 var user = require('./userSchema')
 // var global = require('./global')
 
-var getUsername = function(req, res){ cookie = req.params['cookie']
-  console.log("-> cookie received for getting name: ");
-  console.log(cookie);
-  console.log(req.params['cookie']);
-  user.findOne({ cookie }, function(err, user){
-    if(err) res.send('not found')
-    res.send(user.username)
-    console.log('-> Username Sent: ');
-    console.log(user);
-  })
-}
-
 var isUserExists = function(username, cb) { var is = 0;
   console.log('Checking count');
   user.count({'username': username}, function (err, count){
@@ -22,12 +10,12 @@ var isUserExists = function(username, cb) { var is = 0;
   });
 }
 
-var matchUserPass = function(username, password, cb) {
-  console.log('Matching Username and Password');
-  user.count({username, password}, function (err, count){
-    if(count!=1) { console.log("Not Matched"); cb(0); }
-    else { console.log("Matched"); cb(1); }
-  });
+var matchUserPass = function(username, password) {
+  return user.count({username, password});
 }
 
-module.exports = { getUsername, isUserExists, matchUserPass }
+var allUsers = () => {
+  return user.find();
+}
+
+module.exports = { isUserExists, matchUserPass, allUsers }
