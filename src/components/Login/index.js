@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import styles from './login.styl'
+
 export default class Login extends Component {
   state = {username: '', password: '', error: ''}
   constructor(props) {
@@ -53,7 +54,7 @@ export default class Login extends Component {
             <p><label>password</label> <input type="text" name="password" onChange={this.onChange} /></p>
             <button type="submit">SUBMIT</button>
             <h2>or</h2>
-            <p>Don't have an account?<br /><Link to="register">Create a new account</Link></p>
+            <p>Don't have an account?<br /><Link to={'register' + this.props.location.search} >Create a new account</Link></p>
           </form>
 
       </div>

@@ -13630,7 +13630,7 @@ var Login = function (_Component) {
             _react2.default.createElement('br', null),
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: 'register' },
+              { to: 'register' + this.props.location.search },
               'Create a new account'
             )
           )
@@ -13807,7 +13807,7 @@ var Home = function (_Component) {
             _react2.default.createElement('br', null),
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: 'register' },
+              { to: "login" + this.props.location.search },
               'Create a new account'
             )
           )
