@@ -1,6 +1,7 @@
 import React from 'react';
 import UserBtn from '../Buttons/UserBtn';
 import styles from './chat.styl';
+
 export default class Chat extends React.Component {
   state = {authorized: false, mounted: false}
   constructor(props){
@@ -28,11 +29,16 @@ export default class Chat extends React.Component {
     this.tokenCheck();
     }
   }
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') this.onSubmit(e);
+  }
+  onSubmit = (e) => {
+    console.log(e.target.value);
+  }
   render() {
-    const displayErr = { style: {display: this.state.authorized?'none':'block'} }
     if (!this.state.authorized) {
       return (
-        <div className="unauthErr" {...displayErr} >
+        <div className="unauthErr">
           <h1>UNAUTHORIZED</h1>
           <p>You must be logged in in order to continue.</p>
           <UserBtn
@@ -45,11 +51,13 @@ export default class Chat extends React.Component {
       )
     }
     return (
-      <div>
+      <div className="chat">
+        <div className="channels">{this.state.channels}</div>
+        <div className="chatArea">
+          <div className="messages">
 
-        <div className="channels">
-          {this.state.channels}
-          <br /> chat
+          </div>
+          <input onKeyDown={this.handleKeyPress} />
         </div>
       </div>
     )

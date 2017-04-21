@@ -13280,8 +13280,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(4);
@@ -13298,6 +13296,8 @@ var _chat2 = _interopRequireDefault(_chat);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _newArrowCheck(innerThis, boundThis) { if (innerThis !== boundThis) { throw new TypeError("Cannot instantiate an arrow function"); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -13308,11 +13308,25 @@ var Chat = function (_React$Component) {
   _inherits(Chat, _React$Component);
 
   function Chat(props) {
+    var _this2 = this;
+
     _classCallCheck(this, Chat);
 
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
 
     _this.state = { authorized: false, mounted: false };
+
+    _this.handleKeyPress = function (e) {
+      _newArrowCheck(this, _this2);
+
+      if (e.key === 'Enter') _this.onSubmit(e);
+    }.bind(this);
+
+    _this.onSubmit = function (e) {
+      _newArrowCheck(this, _this2);
+
+      console.log(e.target.value);
+    }.bind(this);
 
     _this.state.channels = _this.getChannels();
     _this.tokenCheck();
@@ -13349,11 +13363,10 @@ var Chat = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var displayErr = { style: { display: this.state.authorized ? 'none' : 'block' } };
       if (!this.state.authorized) {
         return _react2.default.createElement(
           'div',
-          _extends({ className: 'unauthErr' }, displayErr),
+          { className: 'unauthErr' },
           _react2.default.createElement(
             'h1',
             null,
@@ -13382,13 +13395,17 @@ var Chat = function (_React$Component) {
       }
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'chat' },
         _react2.default.createElement(
           'div',
           { className: 'channels' },
-          this.state.channels,
-          _react2.default.createElement('br', null),
-          ' chat'
+          this.state.channels
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'chatArea' },
+          _react2.default.createElement('div', { className: 'messages' }),
+          _react2.default.createElement('input', { onKeyDown: this.handleKeyPress })
         )
       );
     }
@@ -13474,6 +13491,12 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(40);
+
+var _login = __webpack_require__(290);
+
+var _login2 = _interopRequireDefault(_login);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -13486,15 +13509,15 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Home = function (_Component) {
-  _inherits(Home, _Component);
+var Login = function (_Component) {
+  _inherits(Login, _Component);
 
-  function Home(props) {
+  function Login(props) {
     var _this2 = this;
 
-    _classCallCheck(this, Home);
+    _classCallCheck(this, Login);
 
-    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
     _this.state = { username: '', password: '', error: '' };
 
@@ -13542,7 +13565,7 @@ var Home = function (_Component) {
     return _this;
   }
 
-  _createClass(Home, [{
+  _createClass(Login, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
       var token = localStorage.getItem('id_token');
@@ -13553,12 +13576,13 @@ var Home = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { style: { width: '50%', margin: '0 auto' } },
+        { className: 'login' },
         _react2.default.createElement(
           'h1',
           null,
           'Login'
         ),
+        _react2.default.createElement('hr', null),
         _react2.default.createElement(
           'p',
           { className: 'error' },
@@ -13576,7 +13600,7 @@ var Home = function (_Component) {
               'username'
             ),
             ' ',
-            _react2.default.createElement('input', { type: 'text', name: 'username', onChange: this.onChange, style: { width: '30%' } })
+            _react2.default.createElement('input', { type: 'text', name: 'username', onChange: this.onChange })
           ),
           _react2.default.createElement(
             'p',
@@ -13587,18 +13611,38 @@ var Home = function (_Component) {
               'password'
             ),
             ' ',
-            _react2.default.createElement('input', { type: 'text', name: 'password', onChange: this.onChange, style: { width: '30%' } })
+            _react2.default.createElement('input', { type: 'text', name: 'password', onChange: this.onChange })
           ),
-          _react2.default.createElement('input', { type: 'submit' })
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            'SUBMIT'
+          ),
+          _react2.default.createElement(
+            'h2',
+            null,
+            'or'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Don\'t have an account?',
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: 'register' },
+              'Create a new account'
+            )
+          )
         )
       );
     }
   }]);
 
-  return Home;
+  return Login;
 }(_react.Component);
 
-exports.default = Home;
+exports.default = Login;
 
 /***/ }),
 /* 115 */
@@ -13616,6 +13660,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(40);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13696,12 +13742,13 @@ var Home = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { style: { width: '50%', margin: '0 auto' } },
+        { className: 'register' },
         _react2.default.createElement(
           'h1',
           null,
           'Register'
         ),
+        _react2.default.createElement('hr', null),
         _react2.default.createElement(
           'p',
           { className: 'error' },
@@ -13719,7 +13766,7 @@ var Home = function (_Component) {
               'username'
             ),
             ' ',
-            _react2.default.createElement('input', { type: 'text', name: 'username', onChange: this.onChange, style: { width: '30%' } })
+            _react2.default.createElement('input', { type: 'text', name: 'username', onChange: this.onChange })
           ),
           _react2.default.createElement(
             'p',
@@ -13730,7 +13777,7 @@ var Home = function (_Component) {
               'Email'
             ),
             ' ',
-            _react2.default.createElement('input', { type: 'text', name: 'email', onChange: this.onChange, style: { width: '30%' } })
+            _react2.default.createElement('input', { type: 'text', name: 'email', onChange: this.onChange })
           ),
           _react2.default.createElement(
             'p',
@@ -13741,9 +13788,29 @@ var Home = function (_Component) {
               'Password'
             ),
             ' ',
-            _react2.default.createElement('input', { type: 'text', name: 'password', onChange: this.onChange, style: { width: '30%' } })
+            _react2.default.createElement('input', { type: 'text', name: 'password', onChange: this.onChange })
           ),
-          _react2.default.createElement('input', { type: 'submit' })
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            'SUBMIT'
+          ),
+          _react2.default.createElement(
+            'h2',
+            null,
+            'or'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Don\'t have an account?',
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: 'register' },
+              'Create a new account'
+            )
+          )
         )
       );
     }
@@ -32619,7 +32686,7 @@ exports = module.exports = __webpack_require__(15)(undefined);
 
 
 // module
-exports.push([module.i, ".unauthErr {\n  background: #a44;\n  width: 30%;\n  margin: 50px auto;\n  padding: 15px 20px;\n}\n.unauthErr h1 {\n  margin: 0px;\n  color: #ffc0cb;\n  font-size: 20px;\n}\n.unauthErr p {\n  color: #ffc0cb;\n}\n.unauthErr button {\n  margin: 0px 5px;\n}\n", ""]);
+exports.push([module.i, ".unauthErr {\n  background: #a44;\n  width: 30%;\n  margin: 50px auto;\n  padding: 15px 20px;\n}\n.unauthErr h1 {\n  margin: 0px;\n  color: #ffc0cb;\n  font-size: 20px;\n}\n.unauthErr p {\n  color: #ffc0cb;\n}\n.unauthErr button {\n  margin: 0px 5px;\n}\n.chatArea {\n  width: 50%;\n  background: rgba(0,0,0,0.5);\n  padding: 20px 10px;\n  margin: 0 auto;\n  text-align: center;\n}\n.chatArea .messages {\n  border: 2px solid #eee;\n  padding: 5px;\n}\n.chatArea input {\n  background: #808080;\n  border: none;\n  width: 50%;\n  margin: 0 auto;\n  display: inline;\n  height: 1.5em;\n  padding: 0px 5px;\n}\n.chatArea input:focus {\n  outline: none;\n}\n", ""]);
 
 // exports
 
@@ -32723,6 +32790,46 @@ var LoginBtn = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = LoginBtn;
+
+/***/ }),
+/* 289 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(15)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".login,\n.register {\n  background: rgba(20,100,100,0.6);\n  border: 1px solid #fff;\n  width: 35%;\n  margin: 40px auto;\n  position: relative;\n  padding-bottom: 10px;\n}\n.login h1,\n.register h1 {\n  padding: 10px 0px;\n  margin: 0px;\n  text-align: center;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n}\n.login form,\n.register form {\n  text-align: left;\n  width: 50%;\n  margin: 0 auto;\n}\n.login form a,\n.register form a {\n  color: #fff;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(289);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(18)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/stylus-loader/index.js!./login.styl", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/stylus-loader/index.js!./login.styl");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

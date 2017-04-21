@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
-export default class Home extends Component {
+import {Link} from 'react-router-dom'
+import styles from './login.styl'
+export default class Login extends Component {
   state = {username: '', password: '', error: ''}
   constructor(props) {
     super(props);
@@ -43,14 +44,18 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <div style={{width: '50%', margin: '0 auto'}}>
+      <div className="login">
           <h1>Login</h1>
+          <hr />
           <p className="error">{this.state.error}</p>
           <form onSubmit={this.onSubmit}>
-            <p><label>username</label> <input type="text" name="username" onChange={this.onChange} style={{width: '30%'}} /></p>
-            <p><label>password</label> <input type="text" name="password" onChange={this.onChange} style={{width: '30%'}} /></p>
-            <input type="submit" />
+            <p><label>username</label> <input type="text" name="username" onChange={this.onChange} /></p>
+            <p><label>password</label> <input type="text" name="password" onChange={this.onChange} /></p>
+            <button type="submit">SUBMIT</button>
+            <h2>or</h2>
+            <p>Don't have an account?<br /><Link to="register">Create a new account</Link></p>
           </form>
+
       </div>
     )
   }
