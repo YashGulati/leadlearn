@@ -19,6 +19,7 @@ export default class Header extends Component {
   logout = (e) => {
     e.preventDefault();
     localStorage.removeItem('id_token');
+    this.props.logout();
     this.forceUpdate();
   }
   componentWillUpdate() {

@@ -13,20 +13,23 @@ import Chat from './components/Chat';
 import AddQuestion from './components/AddQuestion';
 
 class App extends Component {
-  state = {isMounted: false}
-  componentDidMount() {
-    this.setState({isMounted: true});
+  state = {}
+  logout = () => {
+    rest.logout();
+    this.forceUpdate();
   }
   render() {
     return (
       <Router>
         <div>
-          <Route path='/' component={Header} getAuth={rest.getAuth} />
+          <Route path='/' render={(props)=>
+            <Header logout={this.logout} {...props} />
+          } />
           <Route exact path='/' component={Home}/>
-          <Route exact path='/login' component={Login} isMounted={this.state.isMounted} />
+          <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register}/>
           <Route exact path='/tests' component={Tests} />
-          <Route exact path='/chat' component={Chat} />
+          <Route exact path='/chat' component={Chat} a={this.state.a} />
           <Route exact path='/addQuestion' component={AddQuestion} />
         </div>
       </Router>

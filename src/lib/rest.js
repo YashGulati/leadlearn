@@ -1,5 +1,5 @@
-module.exports = {
-  getAuth: function(val) {
-    alert(val);
+export default {
+  logout: () => {
+    console.log('aaa');
   }
 }
