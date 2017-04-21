@@ -32800,7 +32800,7 @@ exports = module.exports = __webpack_require__(15)(undefined);
 
 
 // module
-exports.push([module.i, ".login,\n.register {\n  background: rgba(20,100,100,0.6);\n  border: 1px solid #fff;\n  width: 35%;\n  margin: 40px auto;\n  position: relative;\n  padding-bottom: 10px;\n}\n.login h1,\n.register h1 {\n  padding: 10px 0px;\n  margin: 0px;\n  text-align: center;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n}\n.login form,\n.register form {\n  text-align: left;\n  width: 50%;\n  margin: 0 auto;\n}\n.login form a,\n.register form a {\n  color: #fff;\n}\n", ""]);
+exports.push([module.i, ".login,\n.register {\n  background: rgba(20,100,100,0.6);\n  border: 1px solid #fff;\n  width: 35%;\n  margin: 40px auto;\n  position: relative;\n  padding-bottom: 10px;\n}\n.login h1,\n.register h1 {\n  padding: 10px 0px;\n  margin: 0px;\n  text-align: center;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n}\n.login form,\n.register form {\n  text-align: left;\n  width: 50%;\n  margin: 0 auto;\n}\n.login form p label,\n.register form p label {\n  text-transform: uppercase;\n}\n.login form a,\n.register form a {\n  color: #fff;\n}\n", ""]);
 
 // exports
 
