@@ -51,7 +51,7 @@ export default class Home extends Component {
             <p><label>Password</label> <input type="text" name="password" onChange={this.onChange} /></p>
             <button type="submit">SUBMIT</button>
             <h2>or</h2>
-            <p>Don't have an account?<br /><Link to={"login" + this.props.location.search}>Create a new account</Link></p>
+            <p>Already have an account?<br /><Link to={"login" + this.props.location.search}>Login to existing account</Link></p>
           </form>
       </div>
     )

@@ -13803,12 +13803,12 @@ var Home = function (_Component) {
           _react2.default.createElement(
             'p',
             null,
-            'Don\'t have an account?',
+            'Already have an account?',
             _react2.default.createElement('br', null),
             _react2.default.createElement(
               _reactRouterDom.Link,
               { to: "login" + this.props.location.search },
-              'Create a new account'
+              'Login to existing account'
             )
           )
         )
