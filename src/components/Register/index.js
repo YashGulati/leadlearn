@@ -9,7 +9,6 @@ export default class Home extends Component {
   }
   componentWillMount() {
     const token = localStorage.getItem('id_token');
-    console.log(token);
     if (token) this.props.history.push('/');
   }
   onSubmit = (e) => { const { username, password, email } = this.state;

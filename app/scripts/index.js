@@ -13349,7 +13349,6 @@ var Home = function (_Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       var token = localStorage.getItem('id_token');
-      console.log(token);
       if (token) this.props.history.push('/');
     }
   }, {
@@ -31417,31 +31416,67 @@ var Header = function (_Component) {
       _newArrowCheck(this, _this2);
 
       e.preventDefault();
-      var token = localStorage.getItem('id_token');
-      console.log(token);
+      var token = _this.state.token;
       if (token) return;
-      _this.props.history.push(e.target.value + '?' + _this.props.location.pathname);
+      if (_this.props.location.pathname === '/login') _this.props.history.push(e.target.value);else _this.props.history.push(e.target.value + '?' + _this.props.location.pathname);
     }.bind(this);
 
+    _this.logout = function (e) {
+      _newArrowCheck(this, _this2);
+
+      e.preventDefault();
+      localStorage.removeItem('id_token');
+      _this.forceUpdate();
+    }.bind(this);
+
+    _this.state = { token: '' };
     return _this;
   }
 
   _createClass(Header, [{
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate() {
+      if (this.state.token != localStorage.getItem('id_token')) this.setState({ token: localStorage.getItem('id_token') });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var markup = void 0;
+      if (!this.state.token) {
+        markup = _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'button',
+            { onClick: this.onClick, name: 'button', className: 'button', href: '#', value: '/login' },
+            'Log in'
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.onClick, name: 'button', className: 'green', href: '#', value: '/register' },
+            'REGISTER'
+          )
+        );
+      } else {
+        markup = _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'button',
+            { onClick: this.logout, name: 'button', className: 'button', href: '#', value: '/login' },
+            'Log out'
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.onClick, name: 'button', className: 'green', href: '#', value: '/register' },
+            'PROFILE'
+          )
+        );
+      }
       return _react2.default.createElement(
         'div',
         { className: 'headerButtons' },
-        _react2.default.createElement(
-          'button',
-          { onClick: this.onClick, name: 'button', className: 'button', href: '#', value: '/login' },
-          'Log in'
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.onClick, name: 'button', className: 'green', href: '#', value: '/register' },
-          'REGISTER'
-        )
+        markup
       );
     }
   }]);
@@ -31647,7 +31682,6 @@ var Home = function (_Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       var token = localStorage.getItem('id_token');
-      console.log(token);
       if (token) this.props.history.push('/');
     }
   }, {
