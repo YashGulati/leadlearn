@@ -35,7 +35,7 @@ export default class Home extends Component {
         return;
       }
       localStorage.setItem('id_token', response.id_token);
-      this.props.history.push('/');
+      this.props.history.push(this.props.location.search.slice(1));
     });
   }
   render() {

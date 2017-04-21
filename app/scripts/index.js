@@ -13337,7 +13337,6 @@ var Home = function (_Component) {
           return;
         }
         localStorage.setItem('id_token', response.id_token);
-        console.log(_this.props);
         _this.props.history.push(_this.props.location.search.slice(1));
       }.bind(this));
     }.bind(this);
@@ -31673,7 +31672,7 @@ var Home = function (_Component) {
           return;
         }
         localStorage.setItem('id_token', response.id_token);
-        _this.props.history.push('/');
+        _this.props.history.push(_this.props.location.search.slice(1));
       }.bind(this));
     }.bind(this), _temp), _possibleConstructorReturn(_this, _ret);
   }
