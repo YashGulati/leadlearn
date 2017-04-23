@@ -2,6 +2,7 @@ import React from 'react';
 import UserBtn from '../Buttons/UserBtn';
 import LeftPane from './LeftPane';
 import Messages from './Messages';
+import InputMessage from './InputMessage';
 import styles from './chat.styl';
 
 export default class Chat extends React.Component {
@@ -31,12 +32,6 @@ export default class Chat extends React.Component {
     this.tokenCheck();
     }
   }
-  handleKeyPress = (e) => {
-    if (e.key === 'Enter') this.onSubmit(e);
-  }
-  onSubmit = (e) => {
-    console.log(e.target.value);
-  }
   render() {
     if (!this.state.authorized) {
       return (
@@ -59,7 +54,7 @@ export default class Chat extends React.Component {
           <div className="messages">
             <Messages />
           </div>
-          <input onKeyDown={this.handleKeyPress} />
+          <InputMessage />
         </div>
       </div>
     )

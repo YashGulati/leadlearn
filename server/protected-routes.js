@@ -11,7 +11,8 @@ const ejwtCheck = ejwt({
 
 app.post('/chat/addMessage', ejwtCheck, (req, res)=> {
   const from = req.user.username;
-  const { message, to} = req.body;
+  const { message, to} = JSON.parse(Object.keys(req.body)[0]);
+  console.log(message, to);
   const params = { message, to, from };
   // validation ~~~
   if (!message || !to || !from) {
