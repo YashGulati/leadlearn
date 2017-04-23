@@ -13294,6 +13294,10 @@ var _LeftPane = __webpack_require__(120);
 
 var _LeftPane2 = _interopRequireDefault(_LeftPane);
 
+var _Messages = __webpack_require__(288);
+
+var _Messages2 = _interopRequireDefault(_Messages);
+
 var _chat = __webpack_require__(277);
 
 var _chat2 = _interopRequireDefault(_chat);
@@ -13408,7 +13412,11 @@ var Chat = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'chatArea' },
-          _react2.default.createElement('div', { className: 'messages' }),
+          _react2.default.createElement(
+            'div',
+            { className: 'messages' },
+            _react2.default.createElement(_Messages2.default, null)
+          ),
           _react2.default.createElement('input', { onKeyDown: this.handleKeyPress })
         )
       );
@@ -32926,6 +32934,109 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
+
+/***/ }),
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _newArrowCheck(innerThis, boundThis) { if (innerThis !== boundThis) { throw new TypeError("Cannot instantiate an arrow function"); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Chat = function (_React$Component) {
+  _inherits(Chat, _React$Component);
+
+  function Chat() {
+    var _ref,
+        _this2 = this;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Chat);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Chat.__proto__ || Object.getPrototypeOf(Chat)).call.apply(_ref, [this].concat(args))), _this), _this.state = { messages: [] }, _this.getMessages = function () {
+      _newArrowCheck(this, _this2);
+
+      var myInit = {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+        },
+        method: "GET"
+      };
+      fetch("/chat/getGlobalMessages", myInit).then(function (response) {
+        _newArrowCheck(this, _this2);
+
+        return response.json();
+      }.bind(this)).then(function (response) {
+        _newArrowCheck(this, _this2);
+
+        if (response.error) {
+          _this.setState({ error: response.error });
+          return;
+        }
+        console.log(response);
+        _this.setState({ messages: response });
+      }.bind(this));
+    }.bind(this), _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(Chat, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.getMessages();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        this.state.messages.map(function (message, idx) {
+          _newArrowCheck(this, _this3);
+
+          return _react2.default.createElement(
+            'p',
+            { key: idx },
+            message.from,
+            ' ',
+            message.message
+          );
+        }.bind(this))
+      );
+    }
+  }]);
+
+  return Chat;
+}(_react2.default.Component);
+
+exports.default = Chat;
 
 /***/ })
 /******/ ]);

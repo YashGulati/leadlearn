@@ -21,4 +21,11 @@ app.post('/chat/addMessage', ejwtCheck, (req, res)=> {
   // ----------------
   require('../dbs/addMessage')(params);
   return res.status(201).send({status: "Message sent successfully"});
-})
+});
+
+app.get('/chat/getGlobalMessages', ejwtCheck, (req, res)=> {
+  const messages = require('../dbs/getGlobalMessages')()
+  .then((messages)=> {
+    return res.send(messages);
+  })
+});
