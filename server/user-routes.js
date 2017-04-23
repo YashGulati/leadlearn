@@ -9,7 +9,8 @@ var getUserData = require('../dbs/getUserData');
 var app = module.exports = express.Router();
 
 function createToken(user) {
-  return jwt.sign(_.omit(user, 'password'), config.secret, { expiresIn: 60*60*5 });
+  const {username} = user;
+  return jwt.sign({username}, config.secret, { expiresIn: 60*60*5 });
 }
 
 app.post('/users', function(req, res) {
@@ -39,11 +40,12 @@ app.post('/tokens', function(req, res) {
     return res.status(400).send({error: "You must send the username and the password"});
   }
   console.log(req.params);
-  getUserData.matchUserPass(username, password)
+  getUserData.getUser(username, password)
   .then((user) => {
     if(!user) return res.status(401).send({error: "The username or password don't match"});
+    if (user.length > 1) console.log("user conflict");
     res.status(201).send({
-      id_token: createToken(user)
+      id_token: createToken(user[0])
     });
   })
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import UserBtn from '../Buttons/UserBtn';
+import LeftPane from './LeftPane';
 import styles from './chat.styl';
 
 export default class Chat extends React.Component {
@@ -52,10 +53,9 @@ export default class Chat extends React.Component {
     }
     return (
       <div className="chat">
-        <div className="channels">{this.state.channels}</div>
+        <LeftPane>{this.state.channels}</LeftPane>
         <div className="chatArea">
           <div className="messages">
-
           </div>
           <input onKeyDown={this.handleKeyPress} />
         </div>

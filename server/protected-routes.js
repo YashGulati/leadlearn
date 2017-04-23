@@ -1,16 +1,24 @@
 var express = require('express'),
-    jwt     = require('express-jwt'),
+    ejwt     = require('express-jwt'),
+    jwt     = require('jsonwebtoken'),
     config  = require('./config');
 
 var app = module.exports = express.Router();
 
-var jwtCheck = jwt({
+const ejwtCheck = ejwt({
   secret: config.secret
 });
 
-// app.use('/addQuestion', jwtCheck);
-app.use('/p/api', jwtCheck);
-
-// app.get('/chat', function(req, res) {
-//   res.status(200).render('index');
-// });
+app.post('/chat/addMessage', ejwtCheck, (req, res)=> {
+  const from = req.user.username;
+  const { message, to} = req.body;
+  const params = { message, to, from };
+  // validation ~~~
+  if (!message || !to || !from) {
+    return res.status(400).send({error: "Missing Parameters"});
+  }
+  // ~~~ to must be a username
+  // ----------------
+  require('../dbs/addMessage')(params);
+  return res.status(201).send({status: "Message sent successfully"});
+})

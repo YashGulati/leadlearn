@@ -10,6 +10,10 @@ var isUserExists = function(username, cb) { var is = 0;
   });
 }
 
+var getUser = function(username, password) {
+  return user.find({username, password});
+}
+
 var matchUserPass = function(username, password) {
   return user.count({username, password});
 }
@@ -18,4 +22,4 @@ var allUsers = () => {
   return user.find();
 }
 
-module.exports = { isUserExists, matchUserPass, allUsers }
+module.exports = { isUserExists, getUser, matchUserPass, allUsers }
